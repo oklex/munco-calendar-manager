@@ -14,6 +14,14 @@ export interface ICalendarResponse {
     website: string;
     running_since: Date
   }
+
+  export interface IOrganizationRequest {
+    short_name: string;
+    full_name: string;
+    organization_type: string;
+    website: string;
+    running_since: Date
+  }
   
   export enum IOrganizationType {
     nonProfit = "Registered non profit",
