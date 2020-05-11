@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default class ApplicationCard extends React.Component<{},{}> {
+export default class AppEditCard extends React.Component<{},{}> {
     /* 
     redux:
     - website key ?

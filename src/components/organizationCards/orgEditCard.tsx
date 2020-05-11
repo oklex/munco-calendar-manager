@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default class OrganizationCard extends React.Component<{},{}> {
+export default class OrgEditCard extends React.Component<{},{}> {
     /* 
     redux:
     - website key ?
