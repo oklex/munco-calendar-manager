@@ -1,13 +1,13 @@
 import React from 'react'
-import ApplicationCard from '../../components/applicationCard/applicationCard'
-import OrganizationCard from '../../components/organizationCard/organizationCard'
+import AppEditCard from '../../components/applicationCards/appEditCard'
+import OrganizationCard from '../../components/organizationCards/orgEditCard'
 
 export default class EditorPanel extends React.Component<{},{}> {
     render() {
         return (
             <div>EditorPanel prototypee
                 <OrganizationCard/>
-                <ApplicationCard/>
+                <AppEditCard/>
             </div>
         )
     }
