@@ -2,6 +2,7 @@ import React from "react";
 import { IOrganization } from "../../models/calendar";
 import { CalendarService } from "../../services/OrganizationServices";
 import './OrganizationList.scss'
+import { Link } from "react-router-dom";
 
 interface IOrganizationListState {
   list: IOrganization[];
@@ -38,14 +39,14 @@ export default class OrganizationList extends React.Component<
   }
 
   showSingleOrganization = (org: IOrganization) => {
-      return (<div className='organizationSelect'>
+      return (<Link to={'/' + org.website_key}><div className='organizationSelect'>
           <h3>{org.short_name}</h3>
           <p>{org.full_name}</p>
-      </div>)
+      </div></Link>)
   }
 
   render() {
-    return <div className='organizationList'>Prototype OrganizationList
+    return <div className='organizationList container'>Prototype OrganizationList
         {this.showAllOrganizations()}
     </div>;
   }

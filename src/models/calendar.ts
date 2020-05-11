@@ -7,6 +7,7 @@ export interface ICalendarResponse {
   }
   
   export interface IOrganization {
+    website_key: string;
     short_name: string;
     full_name: string;
     organization_type: string;
