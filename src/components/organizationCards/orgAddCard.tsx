@@ -11,6 +11,10 @@ import { calendarAPI } from "../../services/constants";
 import { CalendarService } from "../../services/OrganizationServices";
 import { MapStateToOrgRequest } from "../../utils/mapStateToObj";
 
+interface IOrgAddCardProps {
+	refreshParent?: any
+}
+
 interface IOrgAddCardState extends IOrganizationRequest {
 	short_name_warning: string | null;
 	full_name_warning: string | null;
@@ -19,7 +23,7 @@ interface IOrgAddCardState extends IOrganizationRequest {
 	running_since_warning: string | null;
 }
 
-class OrgAddCard extends React.Component<{}, IOrgAddCardState> {
+class OrgAddCard extends React.Component<IOrgAddCardProps, IOrgAddCardState> {
 	state: IOrgAddCardState = {
 		short_name: "",
 		full_name: "",
