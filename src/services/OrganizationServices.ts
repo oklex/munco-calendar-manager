@@ -22,7 +22,7 @@ export const CalendarService = {
 		}
 	},
 
-	async getSingleOrganizationData(website_key: string): Promise<ICalendarResponse[]> {
+	async getSingleOrganizationData(website_key: string): Promise<ICalendarResponse> {
 		try {
 			const { data } = await calendarAPI.get("/organizations/" + website_key + "?include=all")
 			console.log(data)
