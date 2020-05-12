@@ -93,7 +93,7 @@ export default class OrganizationList extends React.Component<
 					type="text"
 					onChange={this.onInputChange}
 					value={this.state.filterInput}
-					onKeyPress={this.onKeyDown}
+					onKeyDown={this.onKeyDown}
 				/>
 				<span id="enterNext"></span>
 			</div>
@@ -108,10 +108,13 @@ export default class OrganizationList extends React.Component<
 	};
 
 	onKeyDown = (e: any) => {
-		// go to the link
 		if ((e.key === "Enter") && this.state.filterInput.length > 0) {
 			this.setState({
 				redirect: true
+			})
+		} else if (e.key === "Escape" || e.keyCode === 27) {
+			this.setState({
+				filterInput: ""
 			})
 		}
 	};
@@ -119,7 +122,7 @@ export default class OrganizationList extends React.Component<
 	showRedirect = () => {
 		if (this.state.redirect && this.state.filterInput.length > 0) {
 			let firstOrg: IOrganization = this.state.filteredList[0]
-			return <Redirect to={"/edit/" + firstOrg.website_key}/>
+			return <Redirect push to={"/edit/" + firstOrg.website_key}/>
 		}
 	}
 
