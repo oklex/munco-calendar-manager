@@ -14,19 +14,6 @@ interface IOrganizationListState {
 	showAddModal: boolean;
 }
 
-const customModalStyles = {
-	content: {
-		top: "50%",
-		left: "50%",
-		right: "auto",
-		bottom: "auto",
-		marginRight: "-50%",
-		transform: "translate(-50%, -50%)",
-		width: "auto",
-		height: "auto"
-	},
-};
-
 Modal.setAppElement("#root");
 
 export default class OrganizationList extends React.Component<
@@ -63,13 +50,13 @@ export default class OrganizationList extends React.Component<
 			});
 	};
 
-	toggleModalOn = (e: any) => {
+	toggleModalOn = (e?: any) => {
 		this.setState({
 			showAddModal: true,
 		});
 		console.log(this.state.showAddModal);
 	};
-	toggleModalOff = (e: any) => {
+	toggleModalOff = (e?: any) => {
 		this.setState({
 			showAddModal: false,
 		});
@@ -111,9 +98,27 @@ export default class OrganizationList extends React.Component<
 					style={customModalStyles}
 				>
 					<button onClick={this.toggleModalOff}>close</button>
-					<OrgAddCard refreshParent={this.getOrgList} />
+					<OrgAddCard
+						refreshParent={() => {
+							this.getOrgList();
+							this.toggleModalOff();
+						}}
+					/>
 				</Modal>
 			</div>
 		);
 	}
 }
+
+const customModalStyles = {
+	content: {
+		top: "50%",
+		left: "50%",
+		right: "auto",
+		bottom: "auto",
+		marginRight: "-50%",
+		transform: "translate(-50%, -50%)",
+		width: "auto",
+		height: "auto",
+	},
+};
