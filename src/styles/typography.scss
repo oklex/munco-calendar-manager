@@ -59,9 +59,13 @@ body {
 	input {
 		border: 1px solid grey;
 		padding: 3px 10px;
+		width: auto;
 	}
 	input:focus {
 		border-color: $munco-green;
+	}
+	label {
+		margin-left: 5px;
 	}
 
 	blockquote {
@@ -104,11 +108,29 @@ body {
 
 	.miniText {
 		font-size: 12px;
-		line-height: 14px;
+		line-height: 12px;
+		margin-top: 0px !important;
 	}
 }
 
 code {
 	font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
 		monospace;
+}
+
+input[type="text"],
+select {
+	width: 100%;
+	padding: 12px 20px;
+	margin: 8px 0;
+	display: inline-block;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+	box-sizing: border-box;
+}
+
+input[type="radio"] {
+	padding-top:0px;
+	margin-top: 15px;
+	margin-right: 5px;
 }

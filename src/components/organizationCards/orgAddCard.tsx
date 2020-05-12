@@ -1,7 +1,7 @@
 import React from "react";
 import { IOrganizationType, IOrganizationRequest } from "../../models/calendar";
 import DatePicker from "react-datepicker";
-import { InputWrapper } from "../InputWrapper";
+import { InputWrapper } from "../InputWrapper/InputWrapper";
 import { CalendarService } from "../../services/OrganizationServices";
 import { MapStateToOrgRequest } from "../../utils/mapStateToObj";
 import {
@@ -10,6 +10,7 @@ import {
 	checkWebsite,
 } from "../../utils/CheckInput";
 import { CardWrapper } from "../CardWrapper/CardWrapper";
+import "./orgAddCard.scss";
 // import '../../styles/index.scss'
 
 interface IOrgAddCardProps {
@@ -209,6 +210,7 @@ class OrgAddCard extends React.Component<IOrgAddCardProps, IOrgAddCardState> {
 				</InputWrapper>
 				<InputWrapper
 					title="Founding date"
+					subtitle="(month/day/year)"
 					warning={this.state.running_since_warning}
 				>
 					<DatePicker
@@ -230,10 +232,10 @@ class OrgAddCard extends React.Component<IOrgAddCardProps, IOrgAddCardState> {
 
 	render() {
 		return (
-				<div>
-						<h1>Add an organization</h1>
-						{this.showForm()}
-				</div>
+			<div className="orgAddCard">
+				<h1>Add an organization</h1>
+				{this.showForm()}
+			</div>
 		);
 	}
 }

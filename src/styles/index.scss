@@ -43,3 +43,14 @@ body::-webkit-scrollbar-track {
 body::-webkit-scrollbar-thumb {
   background-color: $neutral-grey;
 }
+
+.ReactModal__Content{
+  button {
+    float: right;
+  }
+}
+
+.react-datepicker {
+  visibility: hidden;
+  width: 0px;
+}
