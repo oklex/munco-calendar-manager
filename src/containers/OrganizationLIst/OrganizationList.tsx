@@ -1,4 +1,5 @@
 import React from "react";
+import Modal from "react-modal";
 import { IOrganization } from "../../models/calendar";
 import { CalendarService } from "../../services/OrganizationServices";
 import "./OrganizationList.scss";
@@ -10,7 +11,23 @@ interface IOrganizationListState {
 	list: IOrganization[];
 	apiErrorMessage: string | null;
 	loading: boolean;
+	showAddModal: boolean;
 }
+
+const customModalStyles = {
+	content: {
+		top: "50%",
+		left: "50%",
+		right: "auto",
+		bottom: "auto",
+		marginRight: "-50%",
+		transform: "translate(-50%, -50%)",
+		width: "auto",
+		height: "auto"
+	},
+};
+
+Modal.setAppElement("#root");
 
 export default class OrganizationList extends React.Component<
 	{},
@@ -20,6 +37,7 @@ export default class OrganizationList extends React.Component<
 		list: [],
 		apiErrorMessage: null,
 		loading: true,
+		showAddModal: false,
 	};
 
 	componentDidMount = async () => {
@@ -45,11 +63,15 @@ export default class OrganizationList extends React.Component<
 			});
 	};
 
-	addToList = (addNew: IOrganization) => {
-		let newList: IOrganization[] = this.state.list;
-		newList.push(addNew);
+	toggleModalOn = (e: any) => {
 		this.setState({
-			list: newList,
+			showAddModal: true,
+		});
+		console.log(this.state.showAddModal);
+	};
+	toggleModalOff = (e: any) => {
+		this.setState({
+			showAddModal: false,
 		});
 	};
 
@@ -63,8 +85,8 @@ export default class OrganizationList extends React.Component<
 		return (
 			<Link to={"/" + org.website_key} key={org.website_key}>
 				<CardWrapper>
-					<h3>{org.short_name}</h3>
-					<p>{org.full_name}</p>
+					<p>{org.short_name}</p>
+					<p className="miniText">{org.full_name}</p>
 				</CardWrapper>
 			</Link>
 		);
@@ -72,11 +94,25 @@ export default class OrganizationList extends React.Component<
 
 	render() {
 		return (
-			<div className="organizationList container">
-				Prototype OrganizationList
+			<div className="container" id="organizationList">
+				<h1>Select an Organization</h1>
 				<p className="miniText errorText">{this.state.apiErrorMessage}</p>
-				<div className="row">{this.showAllOrganizations()}</div>
-				<OrgAddCard refreshParent={this.getOrgList} />
+				<div className="row">
+					{this.showAllOrganizations()}
+					<CardWrapper onClick={this.toggleModalOn}>
+						<div>
+							<p>add new organization</p>
+						</div>
+					</CardWrapper>
+				</div>
+				<Modal
+					isOpen={this.state.showAddModal}
+					onRequestClose={this.toggleModalOff}
+					style={customModalStyles}
+				>
+					<button onClick={this.toggleModalOff}>close</button>
+					<OrgAddCard refreshParent={this.getOrgList} />
+				</Modal>
 			</div>
 		);
 	}

@@ -1,7 +1,6 @@
 import React from "react";
 import { IOrganizationType, IOrganizationRequest } from "../../models/calendar";
 import DatePicker from "react-datepicker";
-import "./node_modules/react-datepicker/dist/react-datepicker.css";
 import { InputWrapper } from "../InputWrapper";
 import { CalendarService } from "../../services/OrganizationServices";
 import { MapStateToOrgRequest } from "../../utils/mapStateToObj";
@@ -25,6 +24,17 @@ interface IOrgAddCardState extends IOrganizationRequest {
 	running_since_warning: string | null;
 	api_error: string | null;
 }
+
+const customModalStyles = {
+	content : {
+	  top                   : '50%',
+	  left                  : '50%',
+	  right                 : 'auto',
+	  bottom                : 'auto',
+	  marginRight           : '-50%',
+	  transform             : 'translate(-50%, -50%)'
+	}
+  };
 
 class OrgAddCard extends React.Component<IOrgAddCardProps, IOrgAddCardState> {
 	state: IOrgAddCardState = {
@@ -231,10 +241,10 @@ class OrgAddCard extends React.Component<IOrgAddCardProps, IOrgAddCardState> {
 
 	render() {
 		return (
-				<CardWrapper>
+				<div>
 						<h1>Add an organization</h1>
 						{this.showForm()}
-				</CardWrapper>
+				</div>
 		);
 	}
 }
