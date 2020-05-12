@@ -3,7 +3,7 @@
 export interface ICalendarResponse {
     organization: IOrganization,
     events: IConferenceEvent[] | null,
-    applications: IApplicationEvent[] | null
+    applications: IApplication[] | null
   }
   
   export interface IOrganization {
@@ -38,7 +38,8 @@ export interface ICalendarResponse {
     tags: string[];
   }
   
-  export interface IApplicationEvent {
+  export interface IApplication {
+    application_key: string
     name: string
     type: IApplicationType
     start_date: Date
