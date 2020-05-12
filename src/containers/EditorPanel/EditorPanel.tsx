@@ -1,6 +1,5 @@
 import React from "react";
 import AppEditCard from "../../components/applicationCards/appEditCard";
-import OrgEditCard from "../../components/OrganizationCards/orgEditCard";
 import "./EditorPanel.scss";
 import {
   IOrganization,
@@ -17,6 +16,7 @@ interface MatchParams {
 }
 
 interface IEditorPanelState {
+  website_key: string;
   apiWarning: string;
   loading: boolean;
   organization: IOrganization;
@@ -29,6 +29,7 @@ class EditorPanel extends React.Component<
   IEditorPanelState
 > {
   state = {
+    website_key: "",
     apiWarning: "",
     loading: true,
     organization: {
@@ -37,7 +38,7 @@ class EditorPanel extends React.Component<
       website_key: "",
       organization_type: IOrganizationType.studentProject,
       website: "",
-      running_since: new Date()
+      running_since: new Date(),
     },
     applications: [],
     events: [],
@@ -49,6 +50,7 @@ class EditorPanel extends React.Component<
       .then((res) => {
         console.log(res);
         this.setState({
+          website_key: key,
           organization: res.organization,
           applications: res.applications,
           events: res.events,
@@ -67,13 +69,18 @@ class EditorPanel extends React.Component<
   };
 
   showTitle = (org: IOrganization) => {
-      return (
-        <div>
-          <p className="miniText">Editor view for {org.full_name}</p>
-          <h1>{org.short_name}</h1>
-        </div>
-      );
-    
+    return (
+      <div>
+        <p className="miniText">Editor view for {org.full_name}</p>
+        <h1>{org.short_name}</h1>
+      </div>
+    );
+  };
+
+  showAllApps = (apps: IApplication[]) => {
+    return apps.map((app) => {
+      return <AppEditCard appData={app} website_key={this.state.website_key} />;
+    });
   };
 
   render() {
@@ -88,7 +95,9 @@ class EditorPanel extends React.Component<
       return (
         <div className="editor container">
           {this.showTitle(this.state.organization)}
-          <AppEditCard />
+          <br/>
+          <h2>Applications</h2>
+          <div className="row">{this.showAllApps(this.state.applications)}</div>
         </div>
       );
     }
