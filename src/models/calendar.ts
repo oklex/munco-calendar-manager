@@ -2,7 +2,7 @@
 // CC v2
 export interface ICalendarResponse {
     organization: IOrganization,
-    events: IConferenceEvent[] | null,
+    events: IEvent[] | null,
     applications: IApplication[] | null
   }
   
@@ -29,7 +29,7 @@ export interface ICalendarResponse {
     studentProject = "Student Project"
   }
   
-  export interface IConferenceEvent {
+  export interface IEvent {
     venue_name: string;
     venue_city: string;
     start_date: Date;
