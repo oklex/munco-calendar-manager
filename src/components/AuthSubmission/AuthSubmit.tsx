@@ -21,9 +21,13 @@ export default class AuthSubmit extends React.Component<{}, IAuthSubmitState> {
 
 	fetchToken = () => {
 		let token: string = getToken();
+		if (token != "") {
+			
 		this.setState({
 			token,
+			saved: true
 		});
+		}
 	};
 
 	toggleInputDisplay = (show: boolean) => {
