@@ -36,7 +36,7 @@ export let checkOrganizationType = async (org: string) => {
 	let returnVal: boolean = false;
 	await Promise.all(
 		Object.keys(IOrganizationType).map(async (obj: string) => {
-			if (obj.toUpperCase() === org.toUpperCase() || (<any>IOrganizationType)[obj] === org) {
+			if (obj === org || (<any>IOrganizationType)[obj] === org) {
 				returnVal = true;
 			}
 		})
@@ -51,7 +51,7 @@ export let checkApplicationType = async (app: string) => {
 	let returnVal: boolean = false;
 	await Promise.all(
 		Object.keys(IApplicationType).map(async (obj: string) => {
-			if (obj.toUpperCase() === app.toUpperCase() || (<any>IApplicationType)[obj] === app) {
+			if (obj === app || (<any>IApplicationType)[obj] === app) {
 				returnVal = true;
 			}
 		})
