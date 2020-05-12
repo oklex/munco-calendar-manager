@@ -9,7 +9,6 @@ import {
 	checkOrganizationType,
 	checkWebsite,
 } from "../../utils/CheckInput";
-import { CardWrapper } from "../CardWrapper/CardWrapper";
 import "./orgAddCard.scss";
 // import '../../styles/index.scss'
 
