@@ -16,11 +16,11 @@ export interface ICalendarResponse {
   }
 
   export interface IOrganizationRequest {
-    short_name: string;
-    full_name: string;
-    organization_type: string;
-    website: string;
-    running_since: Date
+    short_name?: string;
+    full_name?: string;
+    organization_type?: string;
+    website?: string;
+    running_since?: Date
   }
   
   export enum IOrganizationType {
