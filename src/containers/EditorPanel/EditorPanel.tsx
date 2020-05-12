@@ -2,7 +2,13 @@ import React from "react";
 import AppEditCard from "../../components/applicationCards/appEditCard";
 import OrgEditCard from "../../components/OrganizationCards/orgEditCard";
 import "./EditorPanel.scss";
-import { IOrganization, ICalendarResponse } from "../../models/calendar";
+import {
+  IOrganization,
+  ICalendarResponse,
+  IApplication,
+  IEvent,
+  IOrganizationType,
+} from "../../models/calendar";
 import { RouteComponentProps, withRouter } from "react-router-dom";
 import { CalendarService } from "../../services/OrganizationServices";
 
@@ -11,9 +17,11 @@ interface MatchParams {
 }
 
 interface IEditorPanelState {
-  data: ICalendarResponse[];
-  apiWarning: string | null;
-  loading: boolean
+  apiWarning: string;
+  loading: boolean;
+  organization: IOrganization;
+  applications: IApplication[] | null;
+  events: IEvent[] | null;
 }
 
 class EditorPanel extends React.Component<
@@ -21,38 +29,70 @@ class EditorPanel extends React.Component<
   IEditorPanelState
 > {
   state = {
-    data: [],
-    apiWarning: null,
-    loading: true
+    apiWarning: "",
+    loading: true,
+    organization: {
+      short_name: "",
+      full_name: "",
+      website_key: "",
+      organization_type: IOrganizationType.studentProject,
+      website: "",
+      running_since: new Date()
+    },
+    applications: [],
+    events: [],
   };
 
   componentDidMount = async () => {
     let key: string = this.props.match.params.website_key;
-    await CalendarService.getSingleOrganizationData(
-      key
-    ).then((res) => {
-      this.setState({
-        data: res,
-        loading: false
+    await CalendarService.getSingleOrganizationData(key)
+      .then((res) => {
+        console.log(res);
+        this.setState({
+          organization: res.organization,
+          applications: res.applications,
+          events: res.events,
+          apiWarning: "",
+          loading: false,
+        });
+        return res;
       })
-      return res;
-    }).catch((err) => {
-      console.log(err)
-      this.setState({
-        apiWarning: "Problem connecting with database",
-        loading: false
-      })
-    })
+      .catch((err) => {
+        console.log(err);
+        this.setState({
+          apiWarning: "Problem connecting with database",
+          loading: false,
+        });
+      });
+  };
+
+  showTitle = (org: IOrganization) => {
+      return (
+        <div>
+          <p className="miniText">Editor view for {org.full_name}</p>
+          <h1>{org.short_name}</h1>
+        </div>
+      );
+    
   };
 
   render() {
-    return (
-      <div className="editor container">
-        <p className="miniText">Editor view for </p>
-        <OrgEditCard />
-        <AppEditCard />
-      </div>
-    );
+    if (this.state.organization === null) {
+      return (
+        <div className="editor container">
+          <p>Just a moment please...</p>
+          <p className="miniText errorText"> {this.state.apiWarning}</p>
+        </div>
+      );
+    } else {
+      return (
+        <div className="editor container">
+          {this.showTitle(this.state.organization)}
+          <OrgEditCard />
+          <AppEditCard />
+        </div>
+      );
+    }
   }
 }
 
