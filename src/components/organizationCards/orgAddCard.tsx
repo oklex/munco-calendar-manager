@@ -10,6 +10,7 @@ import { InputWrapper } from "../InputWrapper";
 import { calendarAPI } from "../../services/constants";
 import { CalendarService } from "../../services/OrganizationServices";
 import { MapStateToOrgRequest } from "../../utils/mapStateToObj";
+import { checkName, checkOrganizationType, checkWebsite } from "../../utils/CheckInput";
 
 interface IOrgAddCardProps {
 	refreshParent?: any;
@@ -21,6 +22,7 @@ interface IOrgAddCardState extends IOrganizationRequest {
 	organization_type_warning: string | null;
 	website_warning: string | null;
 	running_since_warning: string | null;
+	api_error: string | null;
 }
 
 class OrgAddCard extends React.Component<IOrgAddCardProps, IOrgAddCardState> {
@@ -35,6 +37,7 @@ class OrgAddCard extends React.Component<IOrgAddCardProps, IOrgAddCardState> {
 		organization_type_warning: null,
 		website_warning: null,
 		running_since_warning: null,
+		api_error: null,
 	};
 
 	submitRequest = async () => {
@@ -55,25 +58,54 @@ class OrgAddCard extends React.Component<IOrgAddCardProps, IOrgAddCardState> {
 					website_warning: null,
 					running_since_warning: null,
 				});
-				this.props.refreshParent()
+				this.props.refreshParent();
 			});
 		} catch (err) {
+			this.setState({
+				api_error: err,
+			});
 			console.log(err);
 		}
 	};
 
 	handleShortNameChange = (e: React.FormEvent<HTMLInputElement>) => {
+		if (!checkName(e.currentTarget.value)) {
+			this.setState({
+				short_name_warning: "name can't be empty or have special characters",
+			});
+		} else if (this.state.short_name_warning) {
+			this.setState({
+				short_name_warning: "",
+			});
+		}
 		this.setState({
 			short_name: e.currentTarget.value,
 		});
 	};
 	handleFullNameChange = (e: React.FormEvent<HTMLInputElement>) => {
+		if (!checkName(e.currentTarget.value)) {
+			this.setState({
+				full_name_warning: "name can't be empty or have special characters",
+			});
+		} else if (this.state.full_name_warning) {
+			this.setState({
+				full_name_warning: "",
+			});
+		}
 		this.setState({
 			full_name: e.currentTarget.value,
 		});
 	};
 	handleOrgTypeChange = (type: IOrganizationType) => {
-		// check to see if it's a valid type
+		if (!checkOrganizationType(type)) {
+			this.setState({
+				organization_type_warning: "name can't be empty or have special characters",
+			});
+		} else if (this.state.organization_type_warning) {
+			this.setState({
+				organization_type_warning: "",
+			});
+		}
 		this.setState({
 			organization_type: type,
 		});
@@ -84,6 +116,15 @@ class OrgAddCard extends React.Component<IOrgAddCardProps, IOrgAddCardState> {
 	};
 
 	handleWebsiteChange = (e: React.FormEvent<HTMLInputElement>) => {
+		if (!checkWebsite(e.currentTarget.value)) {
+			this.setState({
+				website_warning: "invalid website",
+			});
+		} else if (this.state.website_warning) {
+			this.setState({
+				website_warning: "",
+			});
+		}
 		this.setState({
 			website: e.currentTarget.value,
 		});
@@ -183,6 +224,7 @@ class OrgAddCard extends React.Component<IOrgAddCardProps, IOrgAddCardState> {
 				>
 					List new Organization
 				</button>
+				<p className="miniText warningText">{this.state.api_error}</p>
 			</div>
 		);
 	};
