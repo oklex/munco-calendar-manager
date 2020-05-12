@@ -4,71 +4,80 @@ import { CalendarService } from "../../services/OrganizationServices";
 import "./OrganizationList.scss";
 import { Link } from "react-router-dom";
 import OrgAddCard from "../../components/organizationCards/orgAddCard";
+import { CardWrapper } from "../../components/CardWrapper/CardWrapper";
 
 interface IOrganizationListState {
-  list: IOrganization[];
+	list: IOrganization[];
+	apiErrorMessage: string | null;
+	loading: boolean;
 }
 
 export default class OrganizationList extends React.Component<
-  {},
-  IOrganizationListState
+	{},
+	IOrganizationListState
 > {
-  /* 
-    ComponentDidMount : load in all data from calendar API (/api/organizations/:id?include=all)
+	state = {
+		list: [],
+		apiErrorMessage: null,
+		loading: true,
+	};
 
-    functions:
-    - showOrganizationCard
-    - showApplications
-    - showSingleAppCard
+	componentDidMount = async () => {
+		await this.getOrgList();
+	};
 
-    */
-  state = {
-    list: [],
-  };
+	getOrgList = async () => {
+		await CalendarService.getAllOrganizations()
+			.then((res) => {
+				this.setState({
+					list: res,
+					loading: false,
+					apiErrorMessage: null,
+				});
+			})
+			.catch((err) => {
+				this.setState({
+					list: [],
+					loading: false,
+					apiErrorMessage: "Problem connecting to database",
+				});
+				return [];
+			});
+	};
 
-  componentDidMount = async () => {
-    await this.getOrgList()
-  };
+	addToList = (addNew: IOrganization) => {
+		let newList: IOrganization[] = this.state.list;
+		newList.push(addNew);
+		this.setState({
+			list: newList,
+		});
+	};
 
-  getOrgList = async () => {
-    let list: IOrganization[] = await CalendarService.getAllOrganizations();
-    this.setState({
-      list,
-    });
-  }
+	showAllOrganizations = () => {
+		return this.state.list.map((org) => {
+			return this.showSingleOrganization(org);
+		});
+	};
 
-  addToList = (addNew: IOrganization) => {
-    let newList: IOrganization[] = this.state.list
-    newList.push(addNew)
-    this.setState({
-      list: newList
-    })
-  }
+	showSingleOrganization = (org: IOrganization) => {
+		return (
+			<Link to={"/" + org.website_key} key={org.website_key}>
+				<CardWrapper>
+					<h3>{org.short_name}</h3>
+					<p>{org.full_name}</p>
+				</CardWrapper>
+			</Link>
+		);
+	};
 
-  showAllOrganizations = () => {
-    return this.state.list.map((org) => {
-      return this.showSingleOrganization(org);
-    });
-  };
-
-  showSingleOrganization = (org: IOrganization) => {
-    return (
-      <Link to={"/" + org.website_key}>
-        <div className="organizationSelect">
-          <h3>{org.short_name}</h3>
-          <p>{org.full_name}</p>
-        </div>
-      </Link>
-    );
-  };
-
-  render() {
-    return (
-      <div className="organizationList container">
-        Prototype OrganizationList
-        {this.showAllOrganizations()}
-        <OrgAddCard refreshParent={this.getOrgList}/>
-      </div>
-    );
-  }
+	render() {
+		return (
+			<div className="organizationList container">
+				Prototype OrganizationList
+				<p className="miniText errorText">{this.state.apiErrorMessage}</p>
+				<div className="row">{this.showAllOrganizations()}</div>
+				<OrgAddCard refreshParent={this.getOrgList} />
+			</div>
+		);
+	}
 }
