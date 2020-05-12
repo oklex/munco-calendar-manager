@@ -3,6 +3,7 @@ import "./App.scss";
 import EditorPanel from "../EditorPanel/EditorPanel";
 import OrganizationList from "../OrganizationLIst/OrganizationList";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import AuthSubmit from "../../components/AuthSubmission/AuthSubmit";
 
 class App extends React.Component<{}, {}> {
   showOrgList = () => {
@@ -27,6 +28,7 @@ class App extends React.Component<{}, {}> {
             <Route exact path="/:website_key" component={this.showEditor} />
             <Route component={this.show404}/>
           </Switch>
+          <AuthSubmit/>
         </div>
       </Router>
     );
