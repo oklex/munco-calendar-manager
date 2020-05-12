@@ -1,6 +1,6 @@
 import React from 'react'
 import AppEditCard from '../../components/applicationCards/appEditCard'
-import OrganizationCard from '../../components/organizationCards/orgEditCard'
+import OrganizationCard from '../../components/OrganizationCards/orgEditCard'
 
 export default class EditorPanel extends React.Component<{},{}> {
     render() {
