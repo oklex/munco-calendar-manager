@@ -8,7 +8,7 @@ export const CalendarService = {
 			return data;
 		} catch (err) {
 			console.log(err);
-			return [];
+			throw err;
 		}
 	},
 
@@ -18,7 +18,7 @@ export const CalendarService = {
 			return response;
 		} catch (err) {
 			console.log(err);
-			return err;
+			throw err;
 		}
 	},
 };
