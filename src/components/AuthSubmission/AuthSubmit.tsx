@@ -34,7 +34,6 @@ export default class AuthSubmit extends React.Component<{}, IAuthSubmitState> {
 		this.setState({
 			showInput: show,
 		});
-		console.log(this.state);
 	};
 
 	onTokenChange = (e: React.FormEvent<HTMLInputElement>) => {
@@ -45,7 +44,7 @@ export default class AuthSubmit extends React.Component<{}, IAuthSubmitState> {
 	};
 
 	onTokenSave = () => {
-        localStorage.setItem("token",this.state.token);
+        localStorage.setItem("authorization",this.state.token);
         this.toggleInputDisplay(false)
 	};
 

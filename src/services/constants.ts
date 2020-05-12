@@ -11,5 +11,5 @@ function createAPIInstance() {
 }
 
 export function getToken() {
-    return window.localStorage.token || ''
+    return window.localStorage.authorization || ''
   }
