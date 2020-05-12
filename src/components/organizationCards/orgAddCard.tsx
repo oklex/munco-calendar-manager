@@ -12,7 +12,7 @@ import { CalendarService } from "../../services/OrganizationServices";
 import { MapStateToOrgRequest } from "../../utils/mapStateToObj";
 
 interface IOrgAddCardProps {
-	refreshParent?: any
+	refreshParent?: any;
 }
 
 interface IOrgAddCardState extends IOrganizationRequest {
@@ -39,23 +39,26 @@ class OrgAddCard extends React.Component<IOrgAddCardProps, IOrgAddCardState> {
 
 	submitRequest = async () => {
 		// use state to POST /organizations/new
-		let response: string = await CalendarService.postNewOrganization(
-			MapStateToOrgRequest(this.state)
-		);
-		console.log(this.state, response);
-		if (response == "success") {
-			this.setState({
-				short_name: "",
-				full_name: "",
-				organization_type: IOrganizationType.studentProject,
-				website: "",
-				running_since: new Date(),
-				short_name_warning: null,
-				full_name_warning: null,
-				organization_type_warning: null,
-				website_warning: null,
-				running_since_warning: null,
+		try {
+			await CalendarService.postNewOrganization(
+				MapStateToOrgRequest(this.state)
+			).then(() => {
+				this.setState({
+					short_name: "",
+					full_name: "",
+					organization_type: IOrganizationType.studentProject,
+					website: "",
+					running_since: new Date(),
+					short_name_warning: null,
+					full_name_warning: null,
+					organization_type_warning: null,
+					website_warning: null,
+					running_since_warning: null,
+				});
+				this.props.refreshParent()
 			});
+		} catch (err) {
+			console.log(err);
 		}
 	};
 

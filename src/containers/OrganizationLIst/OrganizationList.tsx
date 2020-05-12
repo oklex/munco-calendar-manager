@@ -27,7 +27,7 @@ export default class OrganizationList extends React.Component<
   };
 
   componentDidMount = async () => {
-    await this.getOrgList
+    await this.getOrgList()
   };
 
   getOrgList = async () => {
@@ -35,6 +35,14 @@ export default class OrganizationList extends React.Component<
     this.setState({
       list,
     });
+  }
+
+  addToList = (addNew: IOrganization) => {
+    let newList: IOrganization[] = this.state.list
+    newList.push(addNew)
+    this.setState({
+      list: newList
+    })
   }
 
   showAllOrganizations = () => {
@@ -59,7 +67,7 @@ export default class OrganizationList extends React.Component<
       <div className="organizationList container">
         Prototype OrganizationList
         {this.showAllOrganizations()}
-        <OrgAddCard refreshParent={this.getOrgList()}/>
+        <OrgAddCard refreshParent={this.getOrgList}/>
       </div>
     );
   }

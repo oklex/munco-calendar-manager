@@ -21,7 +21,7 @@ export default class AuthSubmit extends React.Component<{}, IAuthSubmitState> {
 
 	fetchToken = () => {
 		let token: string = getToken();
-		if (token != "") {
+		if (token !== "") {
 			
 		this.setState({
 			token,
