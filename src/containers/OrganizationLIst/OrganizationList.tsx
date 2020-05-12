@@ -141,6 +141,7 @@ export default class OrganizationList extends React.Component<
 					if (shortName.includes(compareBy) || fullName.includes(compareBy)) {
 						newList.push(org);
 					}
+					return 0
 				})
 			).then((res) => {
 				this.setState({
