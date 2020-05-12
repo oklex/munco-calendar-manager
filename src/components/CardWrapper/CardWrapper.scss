@@ -1,13 +1,32 @@
+@import "../../styles/colours.scss";
+
 .cardWrapper {
 	transition: ease-in-out 0.1s;
-    border: solid 1px grey;
-    border-radius: 15px;
-    padding: 5px 15px;
-    margin: 5px;
-    width: auto;
-    max-width: 400px;
+	border: solid 1px grey;
+	border-radius: 15px;
+	padding: 5px 15px;
+	margin: 5px;
+	width: auto;
+	max-width: 400px;
+	animation-name: colourfulFadeIn;
+    animation-duration: 1.5s;
+    transition: ease-in;
 }
 
 .cardWrapper:hover {
 	box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.25);
+}
+
+@keyframes colourfulFadeIn {
+	0% {
+        border-color: $munco-green;
+        color: $munco-green;
+    }
+    50% {
+        border-color: $munco-green;
+    }
+	100% {
+        border-color: grey;
+        color:$dark-grey;
+	}
 }
