@@ -25,17 +25,6 @@ interface IOrgAddCardState extends IOrganizationRequest {
 	api_error: string | null;
 }
 
-const customModalStyles = {
-	content : {
-	  top                   : '50%',
-	  left                  : '50%',
-	  right                 : 'auto',
-	  bottom                : 'auto',
-	  marginRight           : '-50%',
-	  transform             : 'translate(-50%, -50%)'
-	}
-  };
-
 class OrgAddCard extends React.Component<IOrgAddCardProps, IOrgAddCardState> {
 	state: IOrgAddCardState = {
 		short_name: "",
