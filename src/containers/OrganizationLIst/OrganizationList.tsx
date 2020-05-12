@@ -54,7 +54,6 @@ export default class OrganizationList extends React.Component<
 		this.setState({
 			showAddModal: true,
 		});
-		console.log(this.state.showAddModal);
 	};
 	toggleModalOff = (e?: any) => {
 		this.setState({
