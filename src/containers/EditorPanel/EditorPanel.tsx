@@ -5,7 +5,7 @@ import OrgEditCard from '../../components/OrganizationCards/orgEditCard'
 export default class EditorPanel extends React.Component<{},{}> {
     render() {
         return (
-            <div>EditorPanel prototypee
+            <div>EditorPanel prototype
                 <OrgEditCard/>
                 <AppEditCard/>
             </div>
