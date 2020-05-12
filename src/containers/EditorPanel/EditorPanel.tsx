@@ -2,27 +2,53 @@ import React from "react";
 import AppEditCard from "../../components/applicationCards/appEditCard";
 import OrgEditCard from "../../components/OrganizationCards/orgEditCard";
 import "./EditorPanel.scss";
-import { IOrganization } from "../../models/calendar";
+import { IOrganization, ICalendarResponse } from "../../models/calendar";
 import { RouteComponentProps, withRouter } from "react-router-dom";
+import { CalendarService } from "../../services/OrganizationServices";
 
 interface MatchParams {
-  website_key: string
+  website_key: string;
 }
 
-class EditorPanel extends React.Component<RouteComponentProps<MatchParams>> {
+interface IEditorPanelState {
+  data: ICalendarResponse[];
+  apiWarning: string | null;
+  loading: boolean
+}
 
-  componentDidMount = () => {
-    let key: string =this.props.match.params.website_key
-    console.log(key)
-    this.setState({
-        website_key: key
+class EditorPanel extends React.Component<
+  RouteComponentProps<MatchParams>,
+  IEditorPanelState
+> {
+  state = {
+    data: [],
+    apiWarning: null,
+    loading: true
+  };
+
+  componentDidMount = async () => {
+    let key: string = this.props.match.params.website_key;
+    await CalendarService.getSingleOrganizationData(
+      key
+    ).then((res) => {
+      this.setState({
+        data: res,
+        loading: false
+      })
+      return res;
+    }).catch((err) => {
+      console.log(err)
+      this.setState({
+        apiWarning: "Problem connecting with database",
+        loading: false
+      })
     })
   };
 
   render() {
     return (
       <div className="editor container">
-        <p className="miniText">Editor view for ...</p>
+        <p className="miniText">Editor view for </p>
         <OrgEditCard />
         <AppEditCard />
       </div>
@@ -30,4 +56,4 @@ class EditorPanel extends React.Component<RouteComponentProps<MatchParams>> {
   }
 }
 
-export default withRouter(EditorPanel)
+export default withRouter(EditorPanel);
