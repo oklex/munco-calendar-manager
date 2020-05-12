@@ -3,7 +3,7 @@ import { IOrganization } from "../../models/calendar";
 import { CalendarService } from "../../services/OrganizationServices";
 import "./OrganizationList.scss";
 import { Link } from "react-router-dom";
-import OrgAddCard from "../../components/organizationCards/orgAddCard";
+import OrgAddCard from "../../components/OrganizationCards/orgAddCard";
 import { CardWrapper } from "../../components/CardWrapper/CardWrapper";
 
 interface IOrganizationListState {

@@ -1,7 +1,7 @@
 import React from "react";
 import { IOrganizationType, IOrganizationRequest } from "../../models/calendar";
 import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
+import "./node_modules/react-datepicker/dist/react-datepicker.css";
 import { InputWrapper } from "../InputWrapper";
 import { CalendarService } from "../../services/OrganizationServices";
 import { MapStateToOrgRequest } from "../../utils/mapStateToObj";
