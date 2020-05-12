@@ -1,13 +1,8 @@
 import React from "react";
-import {
-	IOrganization,
-	IOrganizationType,
-	IOrganizationRequest,
-} from "../../models/calendar";
+import { IOrganizationType, IOrganizationRequest } from "../../models/calendar";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { InputWrapper } from "../InputWrapper";
-import { calendarAPI } from "../../services/constants";
 import { CalendarService } from "../../services/OrganizationServices";
 import { MapStateToOrgRequest } from "../../utils/mapStateToObj";
 import {
@@ -15,6 +10,7 @@ import {
 	checkOrganizationType,
 	checkWebsite,
 } from "../../utils/CheckInput";
+import { CardWrapper } from "../CardWrapper/CardWrapper";
 // import '../../styles/index.scss'
 
 interface IOrgAddCardProps {
@@ -235,10 +231,10 @@ class OrgAddCard extends React.Component<IOrgAddCardProps, IOrgAddCardState> {
 
 	render() {
 		return (
-			<div>
-				Add an organization
-				{this.showForm()}
-			</div>
+				<CardWrapper>
+						<h1>Add an organization</h1>
+						{this.showForm()}
+				</CardWrapper>
 		);
 	}
 }
