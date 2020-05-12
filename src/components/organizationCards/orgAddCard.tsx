@@ -10,7 +10,12 @@ import { InputWrapper } from "../InputWrapper";
 import { calendarAPI } from "../../services/constants";
 import { CalendarService } from "../../services/OrganizationServices";
 import { MapStateToOrgRequest } from "../../utils/mapStateToObj";
-import { checkName, checkOrganizationType, checkWebsite } from "../../utils/CheckInput";
+import {
+	checkName,
+	checkOrganizationType,
+	checkWebsite,
+} from "../../utils/CheckInput";
+// import '../../styles/index.scss'
 
 interface IOrgAddCardProps {
 	refreshParent?: any;
@@ -42,10 +47,8 @@ class OrgAddCard extends React.Component<IOrgAddCardProps, IOrgAddCardState> {
 
 	submitRequest = async () => {
 		// use state to POST /organizations/new
-		try {
-			await CalendarService.postNewOrganization(
-				MapStateToOrgRequest(this.state)
-			).then(() => {
+		await CalendarService.postNewOrganization(MapStateToOrgRequest(this.state))
+			.then(() => {
 				this.setState({
 					short_name: "",
 					full_name: "",
@@ -59,13 +62,13 @@ class OrgAddCard extends React.Component<IOrgAddCardProps, IOrgAddCardState> {
 					running_since_warning: null,
 				});
 				this.props.refreshParent();
+			})
+			.catch((err) => {
+				this.setState({
+					api_error: "Error submitting data",
+				});
+				console.log("error: ", err, this.state);
 			});
-		} catch (err) {
-			this.setState({
-				api_error: err,
-			});
-			console.log(err);
-		}
 	};
 
 	handleShortNameChange = (e: React.FormEvent<HTMLInputElement>) => {
@@ -99,7 +102,8 @@ class OrgAddCard extends React.Component<IOrgAddCardProps, IOrgAddCardState> {
 	handleOrgTypeChange = (type: IOrganizationType) => {
 		if (!checkOrganizationType(type)) {
 			this.setState({
-				organization_type_warning: "name can't be empty or have special characters",
+				organization_type_warning:
+					"name can't be empty or have special characters",
 			});
 		} else if (this.state.organization_type_warning) {
 			this.setState({
@@ -224,7 +228,7 @@ class OrgAddCard extends React.Component<IOrgAddCardProps, IOrgAddCardState> {
 				>
 					List new Organization
 				</button>
-				<p className="miniText warningText">{this.state.api_error}</p>
+				<p className="miniText errorText">{this.state.api_error}</p>
 			</div>
 		);
 	};
