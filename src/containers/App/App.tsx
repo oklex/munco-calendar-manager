@@ -25,7 +25,7 @@ class App extends React.Component<{}, {}> {
           <meta name="robots" content="noindex" />
           <Switch>
             <Route exact path="/" component={this.showOrgList} />
-            <Route exact path="/:website_key" component={this.showEditor} />
+            <Route exact path="/edit/:website_key" component={this.showEditor} />
             <Route component={this.show404}/>
           </Switch>
           <AuthSubmit/>
