@@ -12,7 +12,7 @@ export class InputWrapper extends React.Component<IInputWrapperProps> {
       <div>
           <p><strong>{this.props.title}</strong></p>
         {this.props.children}
-        <p>{this.props.warning ? this.props.warning : ""}</p>
+        <p className='miniText errorText'>{this.props.warning ? this.props.warning : ""}</p>
       </div>
     );
   }
