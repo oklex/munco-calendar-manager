@@ -1,13 +1,45 @@
-body {
+@import './colours.scss';
+@import './typography.scss';
+
+// start with a CSS reset; avoid browser auto-formatting
+* {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  padding: 0;
+  border: 0;
+  outline: 0;
+  font-size: 100%;
+  vertical-align: baseline;
+  background: transparent;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+html,
+body {
+  width: 100%;
+  height: 100%;
+  margin: 0px;
+  padding: 0px;
+  overflow-x: hidden;
+}
+
+body {
+  overflow-y: scroll;
+  .container {
+    padding-top: 25px;
+    padding-bottom: 25px;
+  }
+}
+
+body::-webkit-scrollbar {
+  margin-top: 12em;
+  width: 0.75em;
+}
+
+body::-webkit-scrollbar-track {
+  background-color: white;
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+}
+
+body::-webkit-scrollbar-thumb {
+  background-color: $neutral-grey;
 }
