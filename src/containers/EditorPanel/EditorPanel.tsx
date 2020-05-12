@@ -88,7 +88,6 @@ class EditorPanel extends React.Component<
       return (
         <div className="editor container">
           {this.showTitle(this.state.organization)}
-          <OrgEditCard />
           <AppEditCard />
         </div>
       );
