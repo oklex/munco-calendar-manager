@@ -10,6 +10,6 @@ function createAPIInstance() {
     })
 }
 
-function getToken() {
+export function getToken() {
     return window.localStorage.token || ''
   }
