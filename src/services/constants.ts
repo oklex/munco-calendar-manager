@@ -5,6 +5,11 @@ export let calendarAPI = createAPIInstance()
 
 function createAPIInstance() {
     return axios.create({
-        baseURL: apiEndpoint
+        baseURL: apiEndpoint,
+        headers: { authorization: getToken() }
     })
 }
+
+function getToken() {
+    return window.localStorage.token || ''
+  }
