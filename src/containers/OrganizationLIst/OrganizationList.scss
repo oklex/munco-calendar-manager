@@ -4,4 +4,17 @@
     .organizationSelect {
         text-align: left;
     }
+    #largeTextInput {
+        font-size: 30px;
+        input: {
+            font-size: 30px;
+        }
+        .mainInput {
+            width: calc(100% - 50px)
+        }
+        #enterNext {
+            font-size: 20px;
+            margin: 5px;
+        }
+    }
 }
