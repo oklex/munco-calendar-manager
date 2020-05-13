@@ -27,10 +27,8 @@ class FlexDate extends React.Component<IFlexDateProps, IFlexDateState> {
 
 	componentDidMount = () => {
 		this.setState({
-			// value: this.props.placeholder,
-			value: new Date(),
-			// displayDate: moment(this.props.placeholder),
-			displayDate: moment(new Date()),
+			value: new Date(this.props.placeholder),
+			displayDate: moment(this.props.placeholder)
 		});
 	};
 
@@ -65,6 +63,8 @@ class FlexDate extends React.Component<IFlexDateProps, IFlexDateState> {
 			displayDate: moment(newDate),
 			errorMessage: this.props.onChange(newDate),
 		});
+        console.log(newDate);
+        {this.toggleInputOff()}
 	};
 
 	onKeyDown = (e: any) => {
@@ -75,9 +75,9 @@ class FlexDate extends React.Component<IFlexDateProps, IFlexDateState> {
 
 	showInput = () => {
 		return (
-			<div className="flexDate" onBlur={this.toggleInputOff}>
+			<div className="flexDate" /*onBlur={this.toggleInputOff}*/>
 				<DatePicker
-                    autoFocus
+					autoFocus
 					onChange={this.onInputChange}
 					selected={this.state.value}
 					onBlur={this.toggleInputOff}
@@ -99,7 +99,7 @@ class FlexDate extends React.Component<IFlexDateProps, IFlexDateState> {
 	};
 
 	render() {
-		return <div className='inline'>{this.showDisplay()}</div>;
+		return <div className="inline">{this.showDisplay()}</div>;
 	}
 }
 
