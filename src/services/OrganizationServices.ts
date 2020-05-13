@@ -1,4 +1,4 @@
-import { IOrganization, IOrganizationRequest, ICalendarResponse } from "../models/calendar";
+import { IOrganization, IOrganizationRequest, ICalendarResponse, IApplicationRequest } from "../models/calendar";
 import { calendarAPI } from "./constants";
 
 export const CalendarService = {
@@ -27,6 +27,15 @@ export const CalendarService = {
 			const { data } = await calendarAPI.get("/organizations/" + website_key + "?include=all")
 			console.log(data)
 			return data
+		} catch (err) {
+			console.log(err);
+			throw err;
+		}
+	},
+
+	async patchSingleApplication(application_key: string, patchObj: IApplicationRequest) {
+		try {
+			await calendarAPI.patch(("/applications/" + application_key), patchObj)
 		} catch (err) {
 			console.log(err);
 			throw err;
