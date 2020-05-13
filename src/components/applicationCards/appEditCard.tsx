@@ -62,7 +62,7 @@ export default class AppEditCard extends React.Component<
             Open: {this.props.appData.start_date} {" - "}
             {this.props.appData.end_date}
           </p>
-          <p>Apply at: <FlexInput placeholder={this.props.appData.applicationLink} onChange={this.onChangeLink}/></p>
+          <p><FlexInput placeholder={this.props.appData.applicationLink} onChange={this.onChangeLink}/></p>
           <p className="errorText miniText">{this.state.apiWarning}</p>
         </div>
       </CardWrapper>
