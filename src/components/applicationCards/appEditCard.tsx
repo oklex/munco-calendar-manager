@@ -130,33 +130,33 @@ export default class AppEditCard extends React.Component<
 		return (
 			<CardWrapper key={this.props.appData.application_key}>
 				<div className="applicationCard">
-					<h3>
+					<div className='h3StyleDiv'>
 						<FlexInput
 							placeholder={this.props.appData.name}
 							onChange={this.onChangeName}
 							refresh={this.state.refresh}
 						/>
-					</h3>
+					</div>
 
-					<p>
+					<div className='pStyleDiv'>
 						<FlexInput
 							type={IAcceptedInputTypes.applicationTypes}
 							placeholder={this.props.appData.type}
 							onChange={this.onChangeType}
 							refresh={this.state.refresh}
 						></FlexInput>
-					</p>
+					</div>
 					<p>
 						Open: {this.props.appData.start_date} {" - "}
 						{this.props.appData.end_date}
 					</p>
-					<p>
+					<div className='pStyleDiv'>
 						<FlexInput
 							placeholder={this.props.appData.applicationLink}
 							onChange={this.onChangeLink}
 							refresh={this.state.refresh}
 						/>
-					</p>
+					</div>
 					<p className="errorText miniText">{this.state.apiWarning}</p>
 					<br />
 					{this.showPatchButton()}

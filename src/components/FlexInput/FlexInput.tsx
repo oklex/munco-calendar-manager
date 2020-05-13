@@ -122,7 +122,7 @@ class FlexInput extends React.Component<IFlexInputProps, IFlexInputState> {
 		if (this.state.showInput) {
 			return this.showInput();
 		} else {
-			return <div onClick={this.toggleInputOn}>{this.state.value}</div>;
+			return <div className="flexInput" onClick={this.toggleInputOn}>{this.state.value}</div>;
 		}
 	};
 

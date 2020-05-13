@@ -114,22 +114,22 @@ body {
 	}
 
 	.pStyleDiv {
-		font-size: 16px;
-		line-height: auto;
+		font-size: 16px !important;
+		line-height: auto ;
 		margin: 0px;
 	}
 
 	.h1StyleDiv {
-		font-size: 40px;
-		line-height: 40px + $basicLinePadding;
+		font-size: 40px !important;
+		line-height: 40px + $basicLinePadding !important;
 	}
 	.h2StyleDiv {
-		font-size: 30px;
-		line-height: 30px + $basicLinePadding;
+		font-size: 30px !important;
+		line-height: 30px + $basicLinePadding !important;
 	}
-	.h3StyleDi {
-		font-size: 25px;
-		line-height: 25px + $basicLinePadding;
+	.h3StyleDiv {
+		font-size: 25px !important;
+		line-height: 25px + $basicLinePadding !important;
 	}
 }
 
