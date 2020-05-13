@@ -16,18 +16,10 @@ export let checkName = (name: string): boolean => {
 export let checkWebsite = async (website: string): Promise<boolean> => {
 	// check if it's unique (not on Firebase)
 	// check whois
-	if (website) {
+	let substring: string[] = website.split(".")
+ 	if (substring.length > 1) {
 		return true;
-		// let whoisResult: boolean = false;
-		// let result: any = await whois.json(website)
-		// if (result) whoisResult = true;
-		// else whoisResult = false;
-		// console.log("during promise: ", whoisResult);
-		// console.log("whois.lookup returns: ", website, result);
-		// return whoisResult;
 	} else {
-		// console.log("website is invalid: ", website);
-		// throw Error("website is invalid: " + website)
 		return false;
 	}
 };
