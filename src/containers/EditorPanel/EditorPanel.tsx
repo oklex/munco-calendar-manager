@@ -10,6 +10,7 @@ import {
 } from "../../models/calendar";
 import { RouteComponentProps, withRouter } from "react-router-dom";
 import { CalendarService } from "../../services/OrganizationServices";
+import { CardWrapper } from "../../components/CardWrapper/CardWrapper";
 
 interface MatchParams {
   website_key: string;
@@ -95,9 +96,17 @@ class EditorPanel extends React.Component<
       return (
         <div className="editor container">
           {this.showTitle(this.state.organization)}
-          <br/>
+          <br />
           <h2>Applications</h2>
-          <div className="row">{this.showAllApps(this.state.applications)}</div>
+          <div className="row">
+            {this.showAllApps(this.state.applications)}
+            <CardWrapper>
+              <div className='addButton'>
+                <h1>+</h1>
+                <p>List a new Application</p>
+              </div>
+            </CardWrapper>
+          </div>
         </div>
       );
     }
