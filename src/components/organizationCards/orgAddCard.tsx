@@ -10,6 +10,7 @@ import {
 	checkWebsite,
 } from "../../utils/CheckInput";
 import "./orgAddCard.scss";
+import "react-datepicker/dist/react-datepicker.css"; // required
 // import '../../styles/index.scss'
 
 interface IOrgAddCardProps {
