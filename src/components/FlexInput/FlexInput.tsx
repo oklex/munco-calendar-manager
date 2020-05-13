@@ -67,14 +67,14 @@ class FlexInput extends React.Component<IFlexInputProps, IFlexInputState> {
     } else {
       return (
         <div onClick={this.toggleInputOn}>
-          <p>{this.state.value}</p>
+          {this.state.value}
         </div>
       );
     }
   };
 
   render() {
-  return <div>{this.showDisplay()}</div>;
+  return <div>{this.showDisplay()}<p className="miniText errorText">{this.state.errorMessage}</p></div>;
   }
 }
 
