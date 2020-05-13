@@ -2,6 +2,7 @@ import React from "react";
 import { IApplication, IApplicationRequest } from "../../models/calendar";
 import { CardWrapper } from "../CardWrapper/CardWrapper";
 import './appEditCard.scss'
+import FlexInput from "../FlexInput/FlexInput";
 
 interface IAppEditCardProps {
   website_key: string;
@@ -35,17 +36,33 @@ export default class AppEditCard extends React.Component<
     console.log("submit patch");
   };
 
+  onChangeName = (value: string) => {
+    this.setState({
+      name: value
+    })
+    console.log(this.state)
+    return ""
+  }
+
+  onChangeLink = (value:string) => {
+    this.setState({
+      applicationLink: value
+    })
+    console.log(this.state)
+    return ""
+  }
+
   render() {
     return (
       <CardWrapper key={this.props.appData.application_key}>
         <div className="applicationCard">
-          <h3>{this.props.appData.name}</h3>
+          <h3><FlexInput placeholder={this.props.appData.name} onChange={this.onChangeName}/></h3>
           <p>{this.props.appData.type} Applications</p>
           <p>
             Open: {this.props.appData.start_date} {" - "}
             {this.props.appData.end_date}
           </p>
-          <p>Apply at: {this.props.appData.applicationLink}</p>
+          <p>Apply at: <FlexInput placeholder={this.props.appData.applicationLink} onChange={this.onChangeLink}/></p>
           <p className="errorText miniText">{this.state.apiWarning}</p>
         </div>
       </CardWrapper>
