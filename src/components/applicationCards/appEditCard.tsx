@@ -2,7 +2,7 @@ import React from "react";
 import { IApplication, IApplicationRequest } from "../../models/calendar";
 import { CardWrapper } from "../CardWrapper/CardWrapper";
 import "./appEditCard.scss";
-import FlexInput from "../FlexInput/FlexInput";
+import FlexInput, { IAcceptedInputTypes } from "../FlexInput/FlexInput";
 import { CalendarService } from "../../services/OrganizationServices";
 import { checkName, checkWebsite } from "../../utils/CheckInput";
 
@@ -121,7 +121,8 @@ export default class AppEditCard extends React.Component<
 							refresh={this.state.refresh}
 						/>
 					</h3>
-					<p>{this.props.appData.type} Applications</p>
+					
+					<p><FlexInput type={IAcceptedInputTypes.applicationTypes} placeholder={this.props.appData.type} onChange={() => {return ""}} refresh={this.state.refresh}></FlexInput></p>
 					<p>
 						Open: {this.props.appData.start_date} {" - "}
 						{this.props.appData.end_date}

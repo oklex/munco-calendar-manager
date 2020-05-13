@@ -1,10 +1,18 @@
 import React from "react";
 import "./FlexInput.scss";
+import { IApplicationType } from "../../models/calendar";
 
 interface IFlexInputProps {
 	placeholder: string;
 	onChange: (val: string) => string;
 	refresh?: number;
+	type?: IAcceptedInputTypes;
+}
+
+export enum IAcceptedInputTypes {
+	text = "text",
+	applicationTypes = "applicationTypes",
+	checkbox = "checkbox",
 }
 
 interface IFlexInputState {
@@ -30,7 +38,7 @@ class FlexInput extends React.Component<IFlexInputProps, IFlexInputState> {
 		prevProps: IFlexInputProps,
 		prevState: IFlexInputState
 	) => {
-		if (prevProps.refresh != this.props.refresh) {
+		if (prevProps.refresh !== this.props.refresh) {
 			this.setState({
 				value: this.props.placeholder,
 				errorMessage: "",
@@ -64,8 +72,8 @@ class FlexInput extends React.Component<IFlexInputProps, IFlexInputState> {
 		}
 	};
 
-	showDisplay = () => {
-		if (this.state.showInput) {
+	showInput = () => {
+		if (!this.props.type || this.props.type === "text") {
 			return (
 				<div onBlur={this.toggleInputOff}>
 					<input
@@ -78,6 +86,25 @@ class FlexInput extends React.Component<IFlexInputProps, IFlexInputState> {
 					/>
 				</div>
 			);
+		} else if (this.props.type === "applicationTypes") {
+			return (
+				<div onBlur={this.toggleInputOff}>
+					<select autoFocus>
+						<option value={IApplicationType.Staff}>Staff</option>
+						<option value={IApplicationType.Delegate}>Delegate</option>
+						<option value={IApplicationType.Secretariat}>Secretariat</option>
+						<option value={IApplicationType.School}>School</option>
+						<option value={IApplicationType.Volunteer}>Delegate</option>
+						<option value={IApplicationType.Other}>Other</option>
+					</select>
+				</div>
+			);
+		}
+	};
+
+	showDisplay = () => {
+		if (this.state.showInput) {
+			return this.showInput();
 		} else {
 			return <div onClick={this.toggleInputOn}>{this.state.value}</div>;
 		}
