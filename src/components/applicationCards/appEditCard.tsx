@@ -3,13 +3,15 @@ import { IApplication, IApplicationRequest } from "../../models/calendar";
 import { CardWrapper } from "../CardWrapper/CardWrapper";
 import './appEditCard.scss'
 import FlexInput from "../FlexInput/FlexInput";
+import { CalendarService } from "../../services/OrganizationServices";
 
 interface IAppEditCardProps {
   website_key: string;
   appData: IApplication;
 }
 
-interface IAppEditCardState extends IApplicationRequest {
+interface IAppEditCardState {
+  patchObj: IApplicationRequest,
   apiWarning: string;
 }
 
@@ -29,24 +31,30 @@ export default class AppEditCard extends React.Component<
     */
 
   state = {
+    patchObj: {},
     apiWarning: "",
   };
 
   submitPatch = () => {
     console.log("submit patch");
+    CalendarService.patchSingleApplication(this.props.appData.application_key, this.state.patchObj)
   };
 
   onChangeName = (value: string) => {
+    let newPatchObj: IApplicationRequest = this.state.patchObj
+    newPatchObj.name = value
     this.setState({
-      name: value
+      patchObj: newPatchObj
     })
     console.log(this.state)
     return ""
   }
 
   onChangeLink = (value:string) => {
+    let newPatchObj: IApplicationRequest = this.state.patchObj
+    newPatchObj.applicationLink = value
     this.setState({
-      applicationLink: value
+      patchObj: newPatchObj
     })
     console.log(this.state)
     return ""
