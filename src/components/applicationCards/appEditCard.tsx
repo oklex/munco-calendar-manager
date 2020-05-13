@@ -1,10 +1,15 @@
 import React from "react";
-import { IApplication, IApplicationRequest } from "../../models/calendar";
+import {
+	IApplication,
+	IApplicationRequest,
+	IApplicationType,
+} from "../../models/calendar";
 import { CardWrapper } from "../CardWrapper/CardWrapper";
 import "./appEditCard.scss";
 import FlexInput, { IAcceptedInputTypes } from "../FlexInput/FlexInput";
 import { CalendarService } from "../../services/OrganizationServices";
 import { checkName, checkWebsite } from "../../utils/CheckInput";
+import { matchAppType } from "../../utils/MatchAppType";
 
 interface IAppEditCardProps {
 	website_key: string;
@@ -77,6 +82,17 @@ export default class AppEditCard extends React.Component<
 		}
 	};
 
+	onChangeType = (value: string) => {
+		let newPatchObj: IApplicationRequest = this.state.patchObj;
+		newPatchObj.type = matchAppType(value);
+		this.setState({
+			patchObj: newPatchObj,
+			edited: true,
+		});
+		console.log(this.state);
+		return "";
+	};
+
 	onChangeLink = (value: string) => {
 		if (!checkWebsite(value)) {
 			return "invalid website";
@@ -121,8 +137,15 @@ export default class AppEditCard extends React.Component<
 							refresh={this.state.refresh}
 						/>
 					</h3>
-					
-					<p><FlexInput type={IAcceptedInputTypes.applicationTypes} placeholder={this.props.appData.type} onChange={() => {return ""}} refresh={this.state.refresh}></FlexInput></p>
+
+					<p>
+						<FlexInput
+							type={IAcceptedInputTypes.applicationTypes}
+							placeholder={this.props.appData.type}
+							onChange={this.onChangeType}
+							refresh={this.state.refresh}
+						></FlexInput>
+					</p>
 					<p>
 						Open: {this.props.appData.start_date} {" - "}
 						{this.props.appData.end_date}

@@ -1,6 +1,7 @@
 import React from "react";
 import "./FlexInput.scss";
 import { IApplicationType } from "../../models/calendar";
+import { matchAppType } from "../../utils/MatchAppType";
 
 interface IFlexInputProps {
 	placeholder: string;
@@ -59,11 +60,20 @@ class FlexInput extends React.Component<IFlexInputProps, IFlexInputState> {
 		});
 	};
 
-	onChange = (e: React.FormEvent<HTMLInputElement>) => {
+	onInputChange = (e: React.FormEvent<HTMLInputElement>) => {
 		this.setState({
 			value: e.currentTarget.value,
 			errorMessage: this.props.onChange(e.currentTarget.value),
 		});
+	};
+
+	onSelectChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+		console.log(e.target.value);
+			let value: string = e.target.value;
+			this.setState({
+				value: e.currentTarget.value,
+				errorMessage: this.props.onChange(value),
+			});
 	};
 
 	onKeyDown = (e: any) => {
@@ -80,7 +90,7 @@ class FlexInput extends React.Component<IFlexInputProps, IFlexInputState> {
 						autoFocus
 						type="text"
 						value={this.state.value}
-						onChange={this.onChange}
+						onChange={this.onInputChange}
 						onKeyDown={this.onKeyDown}
 						onBlur={this.toggleInputOff}
 					/>
@@ -89,12 +99,18 @@ class FlexInput extends React.Component<IFlexInputProps, IFlexInputState> {
 		} else if (this.props.type === "applicationTypes") {
 			return (
 				<div onBlur={this.toggleInputOff}>
-					<select autoFocus>
+					<select
+						autoFocus
+						value={this.state.value}
+						onChange={this.onSelectChange}
+						onKeyDown={this.onKeyDown}
+						onBlur={this.toggleInputOff}
+					>
 						<option value={IApplicationType.Staff}>Staff</option>
 						<option value={IApplicationType.Delegate}>Delegate</option>
 						<option value={IApplicationType.Secretariat}>Secretariat</option>
 						<option value={IApplicationType.School}>School</option>
-						<option value={IApplicationType.Volunteer}>Delegate</option>
+						<option value={IApplicationType.Volunteer}>Volunteer</option>
 						<option value={IApplicationType.Other}>Other</option>
 					</select>
 				</div>
