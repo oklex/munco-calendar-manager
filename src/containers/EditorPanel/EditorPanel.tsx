@@ -85,13 +85,13 @@ class EditorPanel extends React.Component<
 	};
 
 	render() {
-		if (this.state.organization === null) {
+		if ( this.state.loading || this.state.organization === null) {
 			return (
 				<div className="editor container">
 					<Link to="/">
 						<i className="fas">&#xf060;</i>
 					</Link>
-					<p>Just a moment please...</p>
+					<h3>Just a moment please...</h3>
 					<p className="miniText errorText"> {this.state.apiWarning}</p>
 				</div>
 			);
