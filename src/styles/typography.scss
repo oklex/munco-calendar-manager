@@ -22,6 +22,7 @@ body {
 	}
 
 	p {
+		font-size: 16px;
 		line-height: auto;
 		margin: 0px;
 	}
@@ -110,6 +111,25 @@ body {
 		font-size: 12px;
 		line-height: 12px;
 		margin-top: 0px !important;
+	}
+
+	.pStyleDiv {
+		font-size: 16px;
+		line-height: auto;
+		margin: 0px;
+	}
+
+	.h1StyleDiv {
+		font-size: 40px;
+		line-height: 40px + $basicLinePadding;
+	}
+	.h2StyleDiv {
+		font-size: 30px;
+		line-height: 30px + $basicLinePadding;
+	}
+	.h3StyleDi {
+		font-size: 25px;
+		line-height: 25px + $basicLinePadding;
 	}
 }
 
