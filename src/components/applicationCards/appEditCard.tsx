@@ -14,6 +14,8 @@ interface IAppEditCardProps {
 interface IAppEditCardState {
 	patchObj: IApplicationRequest;
 	apiWarning: string;
+	edited: boolean;
+	refresh: number; // iterate when you want to refresh children
 }
 
 export default class AppEditCard extends React.Component<
@@ -36,6 +38,8 @@ export default class AppEditCard extends React.Component<
 			website_key: this.props.website_key,
 		},
 		apiWarning: "",
+		edited: false,
+		refresh: 0,
 	};
 
 	submitPatch = async () => {
@@ -46,6 +50,9 @@ export default class AppEditCard extends React.Component<
 		)
 			.then((res) => {
 				console.log("patch completed");
+				this.setState({
+					edited: false,
+				});
 			})
 			.catch((err) => {
 				console.log(err);
@@ -63,6 +70,7 @@ export default class AppEditCard extends React.Component<
 			newPatchObj.name = value;
 			this.setState({
 				patchObj: newPatchObj,
+				edited: true,
 			});
 			console.log(this.state);
 			return "";
@@ -77,9 +85,28 @@ export default class AppEditCard extends React.Component<
 			newPatchObj.applicationLink = value;
 			this.setState({
 				patchObj: newPatchObj,
+				edited: true,
 			});
 			console.log(this.state);
 			return "";
+		}
+	};
+
+	reset = (e?: any) => {
+		let iteration: number = this.state.refresh + 1;
+		this.setState({ refresh: iteration });
+	};
+
+	showPatchButton = () => {
+		if (this.state.edited) {
+			return (
+				<div className="barOptions d-flex justify-content-between">
+					<button onClick={this.reset}>reset</button>
+					<button onClick={() => this.submitPatch()}> Patch </button>
+				</div>
+			);
+		} else {
+			return <p className="miniText">no changes recorded</p>;
 		}
 	};
 
@@ -91,6 +118,7 @@ export default class AppEditCard extends React.Component<
 						<FlexInput
 							placeholder={this.props.appData.name}
 							onChange={this.onChangeName}
+							refresh={this.state.refresh}
 						/>
 					</h3>
 					<p>{this.props.appData.type} Applications</p>
@@ -102,11 +130,13 @@ export default class AppEditCard extends React.Component<
 						<FlexInput
 							placeholder={this.props.appData.applicationLink}
 							onChange={this.onChangeLink}
+							refresh={this.state.refresh}
 						/>
 					</p>
 					<p className="errorText miniText">{this.state.apiWarning}</p>
+					<br />
+					{this.showPatchButton()}
 				</div>
-				<button onClick={() => this.submitPatch()}>Patch</button>
 			</CardWrapper>
 		);
 	}
