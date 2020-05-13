@@ -89,6 +89,7 @@ export default class OrganizationList extends React.Component<
 		return (
 			<div id="largeTextInput">
 				<input
+					autoFocus
 					className="mainInput"
 					type="text"
 					onChange={this.onInputChange}
