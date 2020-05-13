@@ -31,13 +31,22 @@ export default class AppEditCard extends React.Component<
     */
 
   state = {
-    patchObj: {},
+    patchObj: {
+      website_key: this.props.website_key
+    },
     apiWarning: "",
   };
 
-  submitPatch = () => {
+  submitPatch = async () => {
     console.log("submit patch");
-    CalendarService.patchSingleApplication(this.props.appData.application_key, this.state.patchObj)
+    await CalendarService.patchSingleApplication(this.props.appData.application_key, this.state.patchObj).then((res) => {
+      console.log("patch completed")
+    }).catch((err) => {
+      console.log(err)
+      this.setState({
+        apiWarning: "problem updating data"
+      })
+    })
   };
 
   onChangeName = (value: string) => {
@@ -73,6 +82,7 @@ export default class AppEditCard extends React.Component<
           <p><FlexInput placeholder={this.props.appData.applicationLink} onChange={this.onChangeLink}/></p>
           <p className="errorText miniText">{this.state.apiWarning}</p>
         </div>
+        <button onClick={() =>this.submitPatch()}>Patch</button>
       </CardWrapper>
     );
   }
