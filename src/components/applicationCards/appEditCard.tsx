@@ -10,6 +10,7 @@ import FlexInput, { IAcceptedInputTypes } from "../FlexInput/FlexInput";
 import { CalendarService } from "../../services/OrganizationServices";
 import { checkName, checkWebsite } from "../../utils/CheckInput";
 import { matchAppType } from "../../utils/MatchAppType";
+import FlexDate from "../FlexDate/FlexDate";
 
 interface IAppEditCardProps {
 	website_key: string;
@@ -108,6 +109,27 @@ export default class AppEditCard extends React.Component<
 		}
 	};
 
+	onChangeStartDate = (newDate: Date) => {
+		let newPatchObj: IApplicationRequest = this.state.patchObj;
+		newPatchObj.start_date = newDate;
+		this.setState({
+			patchObj: newPatchObj,
+			edited: true,
+		});
+		console.log(this.state);
+		return "";
+	};
+	onChangeEndDate = (newDate: Date) => {
+		let newPatchObj: IApplicationRequest = this.state.patchObj;
+		newPatchObj.end_date = newDate;
+		this.setState({
+			patchObj: newPatchObj,
+			edited: true,
+		});
+		console.log(this.state);
+		return "";
+	};
+
 	reset = (e?: any) => {
 		let iteration: number = this.state.refresh + 1;
 		this.setState({ refresh: iteration });
@@ -130,7 +152,7 @@ export default class AppEditCard extends React.Component<
 		return (
 			<CardWrapper key={this.props.appData.application_key}>
 				<div className="applicationCard">
-					<div className='h3StyleDiv'>
+					<div className="h3StyleDiv">
 						<FlexInput
 							placeholder={this.props.appData.name}
 							onChange={this.onChangeName}
@@ -138,7 +160,7 @@ export default class AppEditCard extends React.Component<
 						/>
 					</div>
 
-					<div className='pStyleDiv'>
+					<div className="pStyleDiv">
 						<FlexInput
 							type={IAcceptedInputTypes.applicationTypes}
 							placeholder={this.props.appData.type}
@@ -146,11 +168,23 @@ export default class AppEditCard extends React.Component<
 							refresh={this.state.refresh}
 						></FlexInput>
 					</div>
-					<p>
-						Open: {this.props.appData.start_date} {" - "}
-						{this.props.appData.end_date}
-					</p>
-					<div className='pStyleDiv'>
+					<div className="pStyleDiv">
+						<span>Start date: </span>
+						<FlexDate
+							onChange={this.onChangeStartDate}
+							placeholder={this.props.appData.start_date}
+							refresh={this.state.refresh}
+						></FlexDate>
+					</div>
+					<div className="pStyleDiv">
+						<span>End date: </span>
+						<FlexDate
+							onChange={this.onChangeEndDate}
+							placeholder={this.props.appData.end_date}
+							refresh={this.state.refresh}
+						></FlexDate>
+					</div>
+					<div className="pStyleDiv">
 						<FlexInput
 							placeholder={this.props.appData.applicationLink}
 							onChange={this.onChangeLink}
