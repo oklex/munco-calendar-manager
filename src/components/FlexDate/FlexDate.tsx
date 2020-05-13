@@ -1,4 +1,8 @@
 import React from "react";
+import moment, { Moment } from "moment";
+import DatePicker from "react-datepicker";
+import "./FlexDate.scss";
+import "react-datepicker/dist/react-datepicker.css"; // required
 
 interface IFlexDateProps {
 	placeholder: Date;
@@ -8,20 +12,25 @@ interface IFlexDateProps {
 
 interface IFlexDateState {
 	value: Date;
+	displayDate: Moment;
 	errorMessage: string;
 	showInput: boolean;
 }
 
 class FlexDate extends React.Component<IFlexDateProps, IFlexDateState> {
-	state = {
+	state: IFlexDateState = {
 		value: new Date(),
+		displayDate: moment(),
 		errorMessage: "",
 		showInput: false,
 	};
 
 	componentDidMount = () => {
 		this.setState({
-			value: this.props.placeholder,
+			// value: this.props.placeholder,
+			value: new Date(),
+			// displayDate: moment(this.props.placeholder),
+			displayDate: moment(new Date()),
 		});
 	};
 
@@ -36,8 +45,8 @@ class FlexDate extends React.Component<IFlexDateProps, IFlexDateState> {
 				showInput: false,
 			});
 		}
-    };
-    
+	};
+
 	toggleInputOn = (e: any) => {
 		this.setState({
 			showInput: true,
@@ -53,18 +62,44 @@ class FlexDate extends React.Component<IFlexDateProps, IFlexDateState> {
 	onInputChange = (newDate: Date) => {
 		this.setState({
 			value: newDate,
+			displayDate: moment(newDate),
 			errorMessage: this.props.onChange(newDate),
 		});
-    };
-    
+	};
+
 	onKeyDown = (e: any) => {
 		if (e.key === "Enter") {
 			this.toggleInputOff();
 		}
 	};
 
+	showInput = () => {
+		return (
+			<div className="flexDate" onBlur={this.toggleInputOff}>
+				<DatePicker
+                    autoFocus
+					onChange={this.onInputChange}
+					selected={this.state.value}
+					onBlur={this.toggleInputOff}
+				/>
+			</div>
+		);
+	};
+
+	showDisplay = () => {
+		if (this.state.showInput) {
+			return this.showInput();
+		} else {
+			return (
+				<div className="flexDate" onClick={this.toggleInputOn}>
+					{this.state.displayDate.format("MMMM/DD/YYYY")}
+				</div>
+			);
+		}
+	};
+
 	render() {
-		return <div>prototype date picker</div>;
+		return <div className='inline'>{this.showDisplay()}</div>;
 	}
 }
 
