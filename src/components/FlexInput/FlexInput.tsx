@@ -47,14 +47,15 @@ class FlexInput extends React.Component<IFlexInputProps, IFlexInputState> {
   onKeyDown = (e: any) => {
     if (e.key === "Enter") {
       this.toggleInputOff();
-    }
+    } 
   };
 
   showDisplay = () => {
     if (this.state.showInput) {
       return (
-        <div>
+        <div onBlur={this.toggleInputOff}>
           <input
+          autoFocus
             type="text"
             value={this.state.value}
             onChange={this.onChange}
