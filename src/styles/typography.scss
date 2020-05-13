@@ -131,6 +131,10 @@ body {
 		font-size: 25px !important;
 		line-height: 25px + $basicLinePadding !important;
 	}
+
+	.inline {
+		display: inline !important;
+	}
 }
 
 code {
