@@ -49,8 +49,7 @@ class AppCreateCard extends React.Component<
 
   submitPost = async () => {
     console.log("submit patch");
-    await CalendarService.patchSingleApplication(
-      this.props.website_key,
+    await CalendarService.postSingleApplication(
       this.state.postObj
     )
       .then((res) => {

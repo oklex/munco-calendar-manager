@@ -32,6 +32,16 @@ export const CalendarService = {
 			throw err;
 		}
 	},
+	
+	async postSingleApplication(postObj: IApplicationRequest) {
+		console.log(postObj)
+		try {
+			await calendarAPI.post("/applications/new", postObj)
+		} catch (err) {
+			console.log(err);
+			throw err;
+		}
+	},
 
 	async patchSingleApplication(application_key: string, patchObj: IApplicationRequest) {
 		try {
