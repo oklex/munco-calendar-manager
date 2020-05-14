@@ -56,6 +56,7 @@ class AppCreateCard extends React.Component<
         console.log("post completed");
         this.setState({
           edited: false,
+          apiWarning: ""
         });
       })
       .catch((err) => {
@@ -157,7 +158,7 @@ class AppCreateCard extends React.Component<
           <div className="applicationCard">
             <div className="h3StyleDiv">
               <FlexInput
-                placeholder={"Application name"}
+                placeholder={""}
                 onChange={this.onChangeName}
                 refresh={this.state.refresh}
               />
@@ -189,7 +190,7 @@ class AppCreateCard extends React.Component<
             </div>
             <div className="pStyleDiv">
               <FlexInput
-                placeholder={"website link"}
+                placeholder={""}
                 onChange={this.onChangeLink}
                 refresh={this.state.refresh}
               />
