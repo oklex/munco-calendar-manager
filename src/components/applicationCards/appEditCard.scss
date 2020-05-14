@@ -1,18 +1,24 @@
-@import '../../styles/colours.scss';
+@import "../../styles/colours.scss";
 
 .applicationCard {
-    padding-top: 10px;
-    padding-bottom: 10px;
-    width: 330px;
-    height: auto;
-    .barOptions {
-        border-top: 1px solid $neutral-grey;
-        padding-top: 15px;
-        text-align: center;
-    }
+	padding-top: 10px;
+	padding-bottom: 10px;
+	width: 330px;
+	height: auto;
+	.barOptions {
+		border-top: 1px solid $neutral-grey;
+		padding-top: 15px;
+		text-align: center;
+	}
 }
-
-.addButton {
-    width: 100%;
-    min-width: 330px;
+.sideBtn {
+	float: right;
+	width: auto;
+	.btn {
+		height: 35px;
+		color: $neutral-grey;
+	}
+	.dropdown-toggle::after {
+		content: none;
+	}
 }

@@ -19,7 +19,7 @@ import { InputWrapper } from "../InputWrapper/InputWrapper";
 
 interface IAppEditCardProps {
 	website_key: string;
-  appData: IApplication;
+	appData: IApplication;
 }
 
 interface IAppEditCardState {
@@ -71,6 +71,10 @@ export default class AppEditCard extends React.Component<
 					apiWarning: "problem updating data",
 				});
 			});
+	};
+
+	delete = async () => {
+		console.log("requesting delete");
 	};
 
 	onChangeName = (value: string) => {
@@ -152,8 +156,7 @@ export default class AppEditCard extends React.Component<
 		if (this.state.edited) {
 			return (
 				<button className="greenText" onClick={() => this.submitPatch()}>
-					{" "}
-					Patch{" "}
+					Patch
 				</button>
 			);
 		} else {
@@ -164,6 +167,23 @@ export default class AppEditCard extends React.Component<
 	render() {
 		return (
 			<CardWrapper key={this.props.appData.application_key}>
+				<div className=" sideBtn">
+					<button
+						className="btn btn-light dropdown-toggle"
+						type="button"
+						id="dropdownMenuButton"
+						data-toggle="dropdown"
+						aria-haspopup="true"
+						aria-expanded="false"
+					>
+						<i className="fas fa-cog"></i>
+					</button>
+					<div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
+						<a className="dropdown-item" onClick={this.delete}>
+							delete
+						</a>
+					</div>
+				</div>
 				<div className="applicationCard">
 					<div className="h3StyleDiv">
 						<InputWrapper label="name">
