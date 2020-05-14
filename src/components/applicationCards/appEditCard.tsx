@@ -13,7 +13,7 @@ import {
   checkWebsite,
   CheckDateOrder,
 } from "../../utils/CheckInput";
-import { matchAppType } from "../../utils/MatchAppType";
+import { matchAppType } from "../../utils/MatchToType";
 import FlexDate from "../FlexDate/FlexDate";
 
 interface IAppEditCardProps {

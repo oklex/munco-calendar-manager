@@ -12,7 +12,7 @@ import {
   checkWebsite,
   checkName,
 } from "../../utils/CheckInput";
-import { matchAppType } from "../../utils/MatchAppType";
+import { matchAppType } from "../../utils/MatchToType";
 import { CalendarService } from "../../services/OrganizationServices";
 
 interface IAppCreateCardProps {
