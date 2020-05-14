@@ -78,7 +78,6 @@ export default class AppEditCard extends React.Component<
 				patchObj: newPatchObj,
 				edited: true,
 			});
-			console.log(this.state);
 			return "";
 		}
 	};
@@ -90,7 +89,6 @@ export default class AppEditCard extends React.Component<
 			patchObj: newPatchObj,
 			edited: true,
 		});
-		console.log(this.state);
 		return "";
 	};
 
@@ -104,7 +102,6 @@ export default class AppEditCard extends React.Component<
 				patchObj: newPatchObj,
 				edited: true,
 			});
-			console.log(this.state);
 			return "";
 		}
 	};
@@ -116,7 +113,6 @@ export default class AppEditCard extends React.Component<
 			patchObj: newPatchObj,
 			edited: true,
 		});
-		console.log(this.state);
 		return "";
 	};
 	onChangeEndDate = (newDate: Date) => {
@@ -126,7 +122,6 @@ export default class AppEditCard extends React.Component<
 			patchObj: newPatchObj,
 			edited: true,
 		});
-		console.log(this.state);
 		return "";
 	};
 
