@@ -18,6 +18,7 @@ import { InputWrapper } from "../InputWrapper/InputWrapper";
 
 interface IAppCreateCardProps {
 	website_key: string;
+	updateParent?: () => void;
 }
 
 interface IAppEditCardState {
@@ -54,9 +55,21 @@ class AppCreateCard extends React.Component<
 			.then((res) => {
 				console.log("post completed");
 				this.setState({
-					edited: false,
-					apiWarning: "",
+          showEditor: false,
+          postObj: {
+            name: "",
+            type: IApplicationType.Other,
+            start_date: new Date(),
+            end_date: new Date(),
+            dates_tentative: false,
+            applicationLink: "",
+            website_key: this.props.website_key,
+          },
+          apiWarning: "",
+          edited: false,
+          refresh: 0,
 				});
+				if (this.props.updateParent) this.props.updateParent();
 			})
 			.catch((err) => {
 				console.log(err);

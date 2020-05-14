@@ -19,7 +19,7 @@ import { InputWrapper } from "../InputWrapper/InputWrapper";
 
 interface IAppEditCardProps {
 	website_key: string;
-	appData: IApplication;
+  appData: IApplication;
 }
 
 interface IAppEditCardState {

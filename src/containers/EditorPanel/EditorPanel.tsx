@@ -70,6 +70,28 @@ class EditorPanel extends React.Component<
 			});
 	};
 
+	reloadData = async () => {
+		await CalendarService.getSingleOrganizationData(this.state.website_key)
+			.then((res) => {
+				console.log(res);
+				this.setState({
+					organization: res.organization,
+					applications: res.applications,
+					events: res.events,
+					apiWarning: "",
+					loading: false,
+				});
+				return res;
+			})
+			.catch((err) => {
+				console.log(err);
+				this.setState({
+					apiWarning: "Problem connecting with database",
+					loading: false,
+				});
+			});
+	}
+
 	showTitle = (org: IOrganization) => {
 		return (
 			<div>
@@ -107,7 +129,7 @@ class EditorPanel extends React.Component<
 					<h2>Applications</h2>
 					<div className="row">
 						{this.showAllApps(this.state.applications)}
-						<AppCreateCard website_key={this.state.website_key}/>
+						<AppCreateCard website_key={this.state.website_key} updateParent={this.reloadData}/>
 					</div>
 				</div>
 			);
