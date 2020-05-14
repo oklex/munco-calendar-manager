@@ -135,23 +135,26 @@ class OrgAddCard extends React.Component<IOrgAddCardProps, IOrgAddCardState> {
 		return (
 			<div>
 				<div className="h3StyleDiv">
+					<InputWrapper label="Short Name">
 					<FlexInput
 						onChange={() => {
 							return "";
 						}}
-						placeholder="Short Name"
-					></FlexInput>
+						placeholder=""
+					></FlexInput></InputWrapper>
 				</div>
 
 				<div className="pStyleDiv">
+					<InputWrapper label="Full Name">
 					<FlexInput
 						onChange={() => {
 							return "";
 						}}
-						placeholder="Full Name"
-					></FlexInput>
+						placeholder=""
+					/></InputWrapper>
 				</div>
 				<div className="pStyleDiv">
+					<InputWrapper label="Organization Type">
 					<FlexInput
 						type={IAcceptedInputTypes.organizationTypes}
 						onChange={this.handleOrgTypeChange}
@@ -160,24 +163,26 @@ class OrgAddCard extends React.Component<IOrgAddCardProps, IOrgAddCardState> {
 								? this.state.organization_type
 								: "select an organization"
 						}
-					/>
+					/></InputWrapper>
 				</div>
 				<div className="pStyleDiv">
+				<InputWrapper label="Website">
 					<FlexInput
 						onChange={() => {
 							return "";
 						}}
-						placeholder="website"
-					></FlexInput>
+						placeholder=""
+					></FlexInput></InputWrapper>
 				</div>
 				
 				<div className="pStyleDiv">
+				<InputWrapper label="Founded on">
 					<FlexDate
 						onChange={() => {
 							return "";
 						}}
 						placeholder={new Date()}
-					></FlexDate>
+					></FlexDate></InputWrapper>
 				</div>
 				<button
 					type="button"
