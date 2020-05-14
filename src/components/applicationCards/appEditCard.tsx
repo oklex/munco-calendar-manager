@@ -20,6 +20,7 @@ import { InputWrapper } from "../InputWrapper/InputWrapper";
 interface IAppEditCardProps {
 	website_key: string;
 	appData: IApplication;
+	updateParent?: () => any
 }
 
 interface IAppEditCardState {
@@ -74,7 +75,7 @@ export default class AppEditCard extends React.Component<
 	};
 
 	delete = async () => {
-		console.log("requesting delete");
+		console.log("requesting delete on ", this.props.appData.application_key, this.props.website_key);
 		await CalendarService.deleteSingleApplication(
 			this.props.appData.application_key, this.props.website_key
 		).then((res) => {
@@ -83,6 +84,7 @@ export default class AppEditCard extends React.Component<
 				edited: false,
 				apiWarning: "this application has been deleted"
 			});
+			if (this.props.updateParent) this.props.updateParent() 
 		})
 		.catch((err) => {
 			console.log(err);
