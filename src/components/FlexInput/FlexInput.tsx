@@ -1,6 +1,6 @@
 import React from "react";
 import "./FlexInput.scss";
-import { IApplicationType } from "../../models/calendar";
+import { IApplicationType, IOrganizationType } from "../../models/calendar";
 import { matchAppType } from "../../utils/MatchAppType";
 
 interface IFlexInputProps {
@@ -13,6 +13,7 @@ interface IFlexInputProps {
 export enum IAcceptedInputTypes {
   text = "text",
   applicationTypes = "applicationTypes",
+  organizationTypes = "organizationTypes",
   checkbox = "checkbox",
 }
 
@@ -112,6 +113,22 @@ class FlexInput extends React.Component<IFlexInputProps, IFlexInputState> {
             <option value={IApplicationType.School}>School</option>
             <option value={IApplicationType.Volunteer}>Volunteer</option>
             <option value={IApplicationType.Other}>Other</option>
+          </select>
+        </div>
+      );
+    } else if (this.props.type === "organizationTypes") {
+      return (
+        <div onBlur={this.toggleInputOff}>
+          <select
+            autoFocus
+            value={this.state.value}
+            onChange={this.onSelectChange}
+            onKeyDown={this.onKeyDown}
+            onBlur={this.toggleInputOff}
+          >
+            <option value={IOrganizationType.nonProfit}>Staff</option>
+            <option value={IOrganizationType.schoolSponsored}>Delegate</option>
+            <option value={IOrganizationType.studentProject}>Secretariat</option>
           </select>
         </div>
       );

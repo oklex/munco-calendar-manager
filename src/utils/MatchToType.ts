@@ -1,4 +1,4 @@
-import { IApplicationType } from "../models/calendar"
+import { IApplicationType, IOrganizationType } from "../models/calendar"
 
 export let matchAppType = (value: string) => {
     if (IApplicationType.Delegate === value) return IApplicationType.Delegate
@@ -7,7 +7,14 @@ export let matchAppType = (value: string) => {
     else if (IApplicationType.Staff === value) return IApplicationType.Staff
     else if (IApplicationType.Volunteer === value) return IApplicationType.Volunteer
     else if (IApplicationType.Other === value) return IApplicationType.Other
-    else throw Error("now an Application type")
+    else throw Error("not an Application type")
 }
 
-// shouod refactor later
+export let matchOrgType = (value: string) => {
+    if (IOrganizationType.nonProfit === value) return IOrganizationType.nonProfit
+    else if (IOrganizationType.schoolSponsored === value) return IOrganizationType.schoolSponsored
+    else if (IOrganizationType.studentProject === value) return IOrganizationType.studentProject
+    else throw Error("not an Organization type")
+}
+
+// should refactor later
