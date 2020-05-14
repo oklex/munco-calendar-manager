@@ -11,6 +11,9 @@ import {
 } from "../../utils/CheckInput";
 import "./orgAddCard.scss";
 import "react-datepicker/dist/react-datepicker.css"; // required
+import FlexInput, { IAcceptedInputTypes } from "../FlexInput/FlexInput";
+import { matchOrgType } from "../../utils/MatchToType";
+import FlexDate from "../FlexDate/FlexDate";
 // import '../../styles/index.scss'
 
 interface IOrgAddCardProps {
@@ -18,11 +21,11 @@ interface IOrgAddCardProps {
 }
 
 interface IOrgAddCardState extends IOrganizationRequest {
-	short_name_warning: string | null;
-	full_name_warning: string | null;
-	organization_type_warning: string | null;
-	website_warning: string | null;
-	running_since_warning: string | null;
+	// short_name_warning: string | null;
+	// full_name_warning: string | null;
+	// organization_type_warning: string | null;
+	// website_warning: string | null;
+	// running_since_warning: string | null;
 	api_error: string | null;
 }
 
@@ -33,11 +36,11 @@ class OrgAddCard extends React.Component<IOrgAddCardProps, IOrgAddCardState> {
 		organization_type: IOrganizationType.studentProject,
 		website: "",
 		running_since: new Date(),
-		short_name_warning: null,
-		full_name_warning: null,
-		organization_type_warning: null,
-		website_warning: null,
-		running_since_warning: null,
+		// short_name_warning: null,
+		// full_name_warning: null,
+		// organization_type_warning: null,
+		// website_warning: null,
+		// running_since_warning: null,
 		api_error: null,
 	};
 
@@ -51,11 +54,11 @@ class OrgAddCard extends React.Component<IOrgAddCardProps, IOrgAddCardState> {
 					organization_type: IOrganizationType.studentProject,
 					website: "",
 					running_since: new Date(),
-					short_name_warning: null,
-					full_name_warning: null,
-					organization_type_warning: null,
-					website_warning: null,
-					running_since_warning: null,
+					// short_name_warning: null,
+					// full_name_warning: null,
+					// organization_type_warning: null,
+					// website_warning: null,
+					// running_since_warning: null,
 				});
 				this.props.refreshParent();
 			})
@@ -67,157 +70,115 @@ class OrgAddCard extends React.Component<IOrgAddCardProps, IOrgAddCardState> {
 			});
 	};
 
-	handleShortNameChange = (e: React.FormEvent<HTMLInputElement>) => {
-		if (!checkName(e.currentTarget.value)) {
+	// handleShortNameChange = (e: React.FormEvent<HTMLInputElement>) => {
+	// 	if (!checkName(e.currentTarget.value)) {
+	// 		this.setState({
+	// 			short_name_warning: "name can't be empty or have special characters",
+	// 		});
+	// 	} else if (this.state.short_name_warning) {
+	// 		this.setState({
+	// 			short_name_warning: "",
+	// 		});
+	// 	}
+	// 	this.setState({
+	// 		short_name: e.currentTarget.value,
+	// 	});
+	// };
+	// handleFullNameChange = (e: React.FormEvent<HTMLInputElement>) => {
+	// 	if (!checkName(e.currentTarget.value)) {
+	// 		this.setState({
+	// 			full_name_warning: "name can't be empty or have special characters",
+	// 		});
+	// 	} else if (this.state.full_name_warning) {
+	// 		this.setState({
+	// 			full_name_warning: "",
+	// 		});
+	// 	}
+	// 	this.setState({
+	// 		full_name: e.currentTarget.value,
+	// 	});
+	// };
+	handleOrgTypeChange = (value: string) => {
+		try {
+			let type: IOrganizationType = matchOrgType(value);
 			this.setState({
-				short_name_warning: "name can't be empty or have special characters",
+				organization_type: type,
 			});
-		} else if (this.state.short_name_warning) {
-			this.setState({
-				short_name_warning: "",
-			});
+			return "";
+		} catch (err) {
+			console.log(err);
+			return "name can't be empty or have special characters";
 		}
-		this.setState({
-			short_name: e.currentTarget.value,
-		});
-	};
-	handleFullNameChange = (e: React.FormEvent<HTMLInputElement>) => {
-		if (!checkName(e.currentTarget.value)) {
-			this.setState({
-				full_name_warning: "name can't be empty or have special characters",
-			});
-		} else if (this.state.full_name_warning) {
-			this.setState({
-				full_name_warning: "",
-			});
-		}
-		this.setState({
-			full_name: e.currentTarget.value,
-		});
-	};
-	handleOrgTypeChange = (type: IOrganizationType) => {
-		if (!checkOrganizationType(type)) {
-			this.setState({
-				organization_type_warning:
-					"name can't be empty or have special characters",
-			});
-		} else if (this.state.organization_type_warning) {
-			this.setState({
-				organization_type_warning: "",
-			});
-		}
-		this.setState({
-			organization_type: type,
-		});
-	};
-	trueIfSelected = (type: IOrganizationType) => {
-		if (type === this.state.organization_type) return true;
-		else return false;
 	};
 
-	handleWebsiteChange = (e: React.FormEvent<HTMLInputElement>) => {
-		if (!checkWebsite(e.currentTarget.value)) {
-			this.setState({
-				website_warning: "invalid website",
-			});
-		} else if (this.state.website_warning) {
-			this.setState({
-				website_warning: "",
-			});
-		}
-		this.setState({
-			website: e.currentTarget.value,
-		});
-	};
-	handleDateChange = (date: Date) => {
-		this.setState({
-			running_since: date,
-		});
-	};
+	// handleWebsiteChange = (e: React.FormEvent<HTMLInputElement>) => {
+	// 	if (!checkWebsite(e.currentTarget.value)) {
+	// 		this.setState({
+	// 			website_warning: "invalid website",
+	// 		});
+	// 	} else if (this.state.website_warning) {
+	// 		this.setState({
+	// 			website_warning: "",
+	// 		});
+	// 	}
+	// 	this.setState({
+	// 		website: e.currentTarget.value,
+	// 	});
+	// };
+	// handleDateChange = (date: Date) => {
+	// 	this.setState({
+	// 		running_since: date,
+	// 	});
+	// };
 
 	showForm = () => {
 		return (
 			<div>
-				<InputWrapper
-					title="short name"
-					warning={this.state.short_name_warning}
-				>
-					<input
-						type="text"
-						placeholder="short name"
-						value={this.state.short_name}
-						onChange={this.handleShortNameChange}
+				<div className="h3StyleDiv">
+					<FlexInput
+						onChange={() => {
+							return "";
+						}}
+						placeholder="Short Name"
+					></FlexInput>
+				</div>
+
+				<div className="pStyleDiv">
+					<FlexInput
+						onChange={() => {
+							return "";
+						}}
+						placeholder="Full Name"
+					></FlexInput>
+				</div>
+				<div className="pStyleDiv">
+					<FlexInput
+						type={IAcceptedInputTypes.organizationTypes}
+						onChange={this.handleOrgTypeChange}
+						placeholder={
+							this.state.organization_type
+								? this.state.organization_type
+								: "select an organization"
+						}
 					/>
-				</InputWrapper>
-				<InputWrapper title="full name" warning={this.state.full_name_warning}>
-					<input
-						type="text"
-						placeholder="full name"
-						value={this.state.full_name}
-						onChange={this.handleFullNameChange}
-					/>
-				</InputWrapper>
-				<InputWrapper
-					title="Organization type"
-					warning={this.state.organization_type_warning}
-				>
-					<div>
-						<input
-							type="radio"
-							id={IOrganizationType.nonProfit}
-							name="organization_type"
-							onSelect={() =>
-								this.handleOrgTypeChange(IOrganizationType.nonProfit)
-							}
-						/>
-						<label htmlFor={IOrganizationType.nonProfit}>
-							Registered Non-profit
-						</label>
-						<br />
-						<input
-							type="radio"
-							id={IOrganizationType.schoolSponsored}
-							name="organization_type"
-							onSelect={() =>
-								this.handleOrgTypeChange(IOrganizationType.schoolSponsored)
-							}
-						/>
-						<label htmlFor={IOrganizationType.schoolSponsored}>
-							School sponsored
-						</label>
-						<br />
-						<input
-							type="radio"
-							id={IOrganizationType.studentProject}
-							name="organization_type"
-							onSelect={() =>
-								this.handleOrgTypeChange(IOrganizationType.studentProject)
-							}
-						/>
-						<label htmlFor={IOrganizationType.studentProject}>
-							Student Project / other
-						</label>
-						<br />
-					</div>
-				</InputWrapper>
-				<InputWrapper title="website" warning={this.state.website_warning}>
-					<input
-						type="text"
-						placeholder="website url"
-						value={this.state.website}
-						onChange={this.handleWebsiteChange}
-					/>
-				</InputWrapper>
-				<InputWrapper
-					title="Founding date"
-					subtitle="(month/day/year)"
-					warning={this.state.running_since_warning}
-				>
-					<DatePicker
-						onChange={this.handleDateChange}
-						selected={this.state.running_since}
-					/>
-				</InputWrapper>
+				</div>
+				<div className="pStyleDiv">
+					<FlexInput
+						onChange={() => {
+							return "";
+						}}
+						placeholder="website"
+					></FlexInput>
+				</div>
+				
+				<div className="pStyleDiv">
+					<FlexDate
+						onChange={() => {
+							return "";
+						}}
+						placeholder={new Date()}
+					></FlexDate>
+				</div>
 				<button
 					type="button"
 					className="btn btn-secondary"
