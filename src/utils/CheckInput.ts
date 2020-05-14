@@ -14,10 +14,13 @@ export let checkName = (name: string): boolean => {
 };
 
 
-export let checkWebsite = (website: string): boolean => {
+export let checkWebsite = (websiteRaw: string): boolean => {
 	// check if it's unique (not on Firebase)
 	// check whois
-	if (website.includes(".")) {
+	let website: string = websiteRaw.trim()
+	if (website.includes(' ')) {
+		return false
+	} else if (website.includes(".ca") || website.includes(".com") || website.includes(".org") || website.includes(".net") || website.includes(".info") || website.includes(".site") || website.includes(".website") ) {
 		return true;
 	} else {
 		return false;
