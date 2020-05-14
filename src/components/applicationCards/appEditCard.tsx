@@ -8,7 +8,11 @@ import { CardWrapper } from "../CardWrapper/CardWrapper";
 import "./appEditCard.scss";
 import FlexInput, { IAcceptedInputTypes } from "../FlexInput/FlexInput";
 import { CalendarService } from "../../services/OrganizationServices";
-import { checkName, checkWebsite } from "../../utils/CheckInput";
+import {
+  checkName,
+  checkWebsite,
+  CheckDateOrder,
+} from "../../utils/CheckInput";
 import { matchAppType } from "../../utils/MatchAppType";
 import FlexDate from "../FlexDate/FlexDate";
 
@@ -107,22 +111,35 @@ export default class AppEditCard extends React.Component<
   };
 
   onChangeStartDate = (newDate: Date) => {
-    let newPatchObj: IApplicationRequest = this.state.patchObj;
-    newPatchObj.start_date = newDate;
-    this.setState({
-      patchObj: newPatchObj,
-      edited: true,
-    });
-    return "";
+    let obj: IApplicationRequest = this.state.patchObj;
+    let endDate: Date = obj.end_date ? obj.end_date : new Date();
+    if (!CheckDateOrder(newDate, endDate)) {
+      return "start date must be before end date";
+    } else {
+      let newPatchObj: IApplicationRequest = this.state.patchObj;
+      newPatchObj.start_date = newDate;
+      this.setState({
+        patchObj: newPatchObj,
+        edited: true,
+      });
+      return "";
+    }
   };
+
   onChangeEndDate = (newDate: Date) => {
-    let newPatchObj: IApplicationRequest = this.state.patchObj;
-    newPatchObj.end_date = newDate;
-    this.setState({
-      patchObj: newPatchObj,
-      edited: true,
-    });
-    return "";
+    let obj: IApplicationRequest = this.state.patchObj;
+    let start: Date = obj.start_date ? obj.start_date : new Date();
+    if (!CheckDateOrder(start, newDate)) {
+      return "end date must come after start date";
+    } else {
+      let newPatchObj: IApplicationRequest = this.state.patchObj;
+      newPatchObj.end_date = newDate;
+      this.setState({
+        patchObj: newPatchObj,
+        edited: true,
+      });
+      return "";
+    }
   };
 
   reset = (e?: any) => {
@@ -185,7 +202,9 @@ export default class AppEditCard extends React.Component<
           <br />
 
           <div className="barOptions d-flex justify-content-between">
-            <button onClick={this.reset}><p className='miniText'>reset</p></button>
+            <button onClick={this.reset}>
+              <p className="miniText">reset</p>
+            </button>
             {this.showPatchButton()}
           </div>
         </div>

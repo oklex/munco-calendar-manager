@@ -2,6 +2,7 @@ import {
 	IOrganizationType,
 	IApplicationType,
 } from "../models/calendar";
+import moment from "moment";
 
 export let checkName = (name: string): boolean => {
 	if (name) {
@@ -16,7 +17,7 @@ export let checkName = (name: string): boolean => {
 export let checkWebsite = (website: string): boolean => {
 	// check if it's unique (not on Firebase)
 	// check whois
- 	if (website.includes(".")) {
+	if (website.includes(".")) {
 		return true;
 	} else {
 		return false;
@@ -62,3 +63,10 @@ export let checkValidDate = (date: string) => {
 		return false;
 	}
 };
+
+export let CheckDateOrder = (start: Date, end: Date) => {
+	console.log(start, end)
+	let confirmOrder: boolean = moment(start).isBefore(end)
+	console.log(confirmOrder)
+	return confirmOrder
+}
