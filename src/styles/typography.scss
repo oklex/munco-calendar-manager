@@ -122,14 +122,17 @@ body {
 	.h1StyleDiv {
 		font-size: 40px !important;
 		line-height: 40px + $basicLinePadding !important;
+		margin-bottom: 5px;
 	}
 	.h2StyleDiv {
 		font-size: 30px !important;
 		line-height: 30px + $basicLinePadding !important;
+		margin-bottom: 5px;
 	}
 	.h3StyleDiv {
 		font-size: 25px !important;
 		line-height: 25px + $basicLinePadding !important;
+		margin-bottom: 5px;
 	}
 
 	.inline {
