@@ -70,6 +70,6 @@ export let checkValidDate = (date: string) => {
 export let CheckDateOrder = (start: Date, end: Date) => {
 	console.log(start, end)
 	let confirmOrder: boolean = moment(start).isBefore(end)
-	console.log(confirmOrder)
+	// console.log(confirmOrder)
 	return confirmOrder
 }

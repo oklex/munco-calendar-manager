@@ -107,12 +107,12 @@ class FlexInput extends React.Component<IFlexInputProps, IFlexInputState> {
             onKeyDown={this.onKeyDown}
             onBlur={this.toggleInputOff}
           >
-            <option value={IApplicationType.Staff}>Staff</option>
-            <option value={IApplicationType.Delegate}>Delegate</option>
-            <option value={IApplicationType.Secretariat}>Secretariat</option>
-            <option value={IApplicationType.School}>School</option>
-            <option value={IApplicationType.Volunteer}>Volunteer</option>
-            <option value={IApplicationType.Other}>Other</option>
+            <option value={IApplicationType.Staff}>{IApplicationType.Staff}</option>
+            <option value={IApplicationType.Delegate}>{IApplicationType.Delegate}</option>
+            <option value={IApplicationType.Secretariat}>{IApplicationType.Secretariat}</option>
+            <option value={IApplicationType.School}>{IApplicationType.School}</option>
+            <option value={IApplicationType.Volunteer}>{IApplicationType.Volunteer}</option>
+            <option value={IApplicationType.Other}>{IApplicationType.Other}</option>
           </select>
         </div>
       );
@@ -126,9 +126,9 @@ class FlexInput extends React.Component<IFlexInputProps, IFlexInputState> {
             onKeyDown={this.onKeyDown}
             onBlur={this.toggleInputOff}
           >
-            <option value={IOrganizationType.nonProfit}>Staff</option>
-            <option value={IOrganizationType.schoolSponsored}>Delegate</option>
-            <option value={IOrganizationType.studentProject}>Secretariat</option>
+            <option value={IOrganizationType.nonProfit}>{IOrganizationType.nonProfit}</option>
+            <option value={IOrganizationType.schoolSponsored}>{IOrganizationType.schoolSponsored}</option>
+            <option value={IOrganizationType.studentProject}>{IOrganizationType.studentProject}</option>
           </select>
         </div>
       );
