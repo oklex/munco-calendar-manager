@@ -11,6 +11,7 @@ import {
 import { RouteComponentProps, withRouter, Link } from "react-router-dom";
 import { CalendarService } from "../../services/OrganizationServices";
 import { CardWrapper } from "../../components/CardWrapper/CardWrapper";
+import AppCreateCard from "../../components/applicationCards/appCreateCard";
 
 interface MatchParams {
 	website_key: string;
@@ -106,12 +107,7 @@ class EditorPanel extends React.Component<
 					<h2>Applications</h2>
 					<div className="row">
 						{this.showAllApps(this.state.applications)}
-						<CardWrapper>
-							<div className="addButton">
-								<h1>+</h1>
-								<p>List a new Application</p>
-							</div>
-						</CardWrapper>
+						<AppCreateCard website_key={this.state.website_key}/>
 					</div>
 				</div>
 			);
