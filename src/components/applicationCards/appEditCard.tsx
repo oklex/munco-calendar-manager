@@ -149,7 +149,7 @@ export default class AppEditCard extends React.Component<
 
   showPatchButton = () => {
     if (this.state.edited) {
-      return <button onClick={() => this.submitPatch()}> Patch </button>;
+      return <button className="greenText" onClick={() => this.submitPatch()}> Patch </button>;
     } else {
       return <p className="miniText">no changes recorded</p>;
     }
@@ -198,13 +198,13 @@ export default class AppEditCard extends React.Component<
               refresh={this.state.refresh}
             />
           </div>
-          <p className="errorText miniText">{this.state.apiWarning}</p>
           <br />
 
           <div className="barOptions d-flex justify-content-between">
             <button onClick={this.reset}>
               <p className="miniText">reset</p>
             </button>
+          <p className="errorText miniText">{this.state.apiWarning}</p>
             {this.showPatchButton()}
           </div>
         </div>
