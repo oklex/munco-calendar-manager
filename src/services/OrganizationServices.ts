@@ -65,11 +65,8 @@ export const CalendarService = {
 	},
 
 	async deleteSingleApplication(application_key: string, website_key: string) {
-		let body: any = {
-			website_Key: website_key,
-		};
 		try {
-			await calendarAPI.delete("/applications/" + application_key, body);
+			await calendarAPI.delete("/applications/" + application_key, { data: {website_key} });
 		} catch (err) {
 			console.log(err);
 			throw err;
