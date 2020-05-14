@@ -14,7 +14,7 @@ interface IOrganizationListState {
 	apiErrorMessage: string | null;
 	loading: boolean;
 	showAddModal: boolean;
-	redirect: boolean
+	redirect: boolean;
 }
 
 Modal.setAppElement("#root");
@@ -30,7 +30,7 @@ export default class OrganizationList extends React.Component<
 		apiErrorMessage: null,
 		loading: true,
 		showAddModal: false,
-		redirect: false
+		redirect: false,
 	};
 
 	componentDidMount = async () => {
@@ -109,23 +109,23 @@ export default class OrganizationList extends React.Component<
 	};
 
 	onKeyDown = (e: any) => {
-		if ((e.key === "Enter") && this.state.filterInput.length > 0) {
+		if (e.key === "Enter" && this.state.filterInput.length > 0) {
 			this.setState({
-				redirect: true
-			})
+				redirect: true,
+			});
 		} else if (e.key === "Escape" || e.keyCode === 27) {
 			this.setState({
-				filterInput: ""
-			})
+				filterInput: "",
+			});
 		}
 	};
 
 	showRedirect = () => {
 		if (this.state.redirect && this.state.filterInput.length > 0) {
-			let firstOrg: IOrganization = this.state.filteredList[0]
-			return <Redirect push to={"/edit/" + firstOrg.website_key}/>
+			let firstOrg: IOrganization = this.state.filteredList[0];
+			return <Redirect push to={"/edit/" + firstOrg.website_key} />;
 		}
-	}
+	};
 
 	updateFilteredList = async () => {
 		let compareBy: string = this.state.filterInput.toUpperCase();
@@ -142,7 +142,7 @@ export default class OrganizationList extends React.Component<
 					if (shortName.includes(compareBy) || fullName.includes(compareBy)) {
 						newList.push(org);
 					}
-					return 0
+					return 0;
 				})
 			).then((res) => {
 				this.setState({
@@ -155,32 +155,34 @@ export default class OrganizationList extends React.Component<
 
 	render() {
 		return (
-			<div className="container" id="organizationList">
-				<h1>Select an Organization</h1>
-				<p className="miniText errorText">{this.state.apiErrorMessage}</p>
-				{this.showFilterSelection()}
-				<div className="row">
-					{this.showAllOrganizations()}
-					<CardWrapper onClick={this.toggleModalOn}>
-						<div>
-							<p>add new organization</p>
-						</div>
-					</CardWrapper>
+			<div className="row justify-content-end">
+				<div className="mainContainer col-lg-10" id="organizationList">
+					<h1>Select an Organization</h1>
+					<p className="miniText errorText">{this.state.apiErrorMessage}</p>
+					{this.showFilterSelection()}
+					<div className="row">
+						{this.showAllOrganizations()}
+						<CardWrapper onClick={this.toggleModalOn}>
+							<div>
+								<p>add new organization</p>
+							</div>
+						</CardWrapper>
+					</div>
+					<Modal
+						isOpen={this.state.showAddModal}
+						onRequestClose={this.toggleModalOff}
+						style={customModalStyles}
+					>
+						<button onClick={this.toggleModalOff}>close</button>
+						<OrgAddCard
+							refreshParent={() => {
+								this.getOrgList();
+								this.toggleModalOff();
+							}}
+						/>
+					</Modal>
+					{this.showRedirect()}
 				</div>
-				<Modal
-					isOpen={this.state.showAddModal}
-					onRequestClose={this.toggleModalOff}
-					style={customModalStyles}
-				>
-					<button onClick={this.toggleModalOff}>close</button>
-					<OrgAddCard
-						refreshParent={() => {
-							this.getOrgList();
-							this.toggleModalOff();
-						}}
-					/>
-				</Modal>
-				{this.showRedirect()}
 			</div>
 		);
 	}

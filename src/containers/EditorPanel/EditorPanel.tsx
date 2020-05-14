@@ -90,7 +90,7 @@ class EditorPanel extends React.Component<
 					loading: false,
 				});
 			});
-	}
+	};
 
 	showTitle = (org: IOrganization) => {
 		return (
@@ -108,7 +108,7 @@ class EditorPanel extends React.Component<
 	};
 
 	render() {
-		if ( this.state.loading || this.state.organization === null) {
+		if (this.state.loading || this.state.organization === null) {
 			return (
 				<div className="editor container">
 					<Link to="/">
@@ -120,16 +120,21 @@ class EditorPanel extends React.Component<
 			);
 		} else {
 			return (
-				<div className="editor container">
-					<Link to="/">
-						<i className="fas">&#xf060;</i>
-					</Link>
-					{this.showTitle(this.state.organization)}
-					<br />
-					<h2>Applications</h2>
-					<div className="row">
-						{this.showAllApps(this.state.applications)}
-						<AppCreateCard website_key={this.state.website_key} updateParent={this.reloadData}/>
+				<div className="row justify-content-end">
+					<div className="mainContainer editor col-lg-10">
+						<Link to="/">
+							<i className="fas">&#xf060;</i>
+						</Link>
+						{this.showTitle(this.state.organization)}
+						<br />
+						<h2>Applications</h2>
+						<div className="row">
+							{this.showAllApps(this.state.applications)}
+							<AppCreateCard
+								website_key={this.state.website_key}
+								updateParent={this.reloadData}
+							/>
+						</div>
 					</div>
 				</div>
 			);
