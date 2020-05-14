@@ -13,11 +13,10 @@ export let checkName = (name: string): boolean => {
 };
 
 
-export let checkWebsite = async (website: string): Promise<boolean> => {
+export let checkWebsite = (website: string): boolean => {
 	// check if it's unique (not on Firebase)
 	// check whois
-	let substring: string[] = website.split(".")
- 	if (substring.length > 1) {
+ 	if (website.includes(".")) {
 		return true;
 	} else {
 		return false;
