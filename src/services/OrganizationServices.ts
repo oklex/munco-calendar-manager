@@ -1,4 +1,9 @@
-import { IOrganization, IOrganizationRequest, ICalendarResponse, IApplicationRequest } from "../models/calendar";
+import {
+	IOrganization,
+	IOrganizationRequest,
+	ICalendarResponse,
+	IApplicationRequest,
+} from "../models/calendar";
 import { calendarAPI } from "./constants";
 
 export const CalendarService = {
@@ -22,33 +27,52 @@ export const CalendarService = {
 		}
 	},
 
-	async getSingleOrganizationData(website_key: string): Promise<ICalendarResponse> {
+	async getSingleOrganizationData(
+		website_key: string
+	): Promise<ICalendarResponse> {
 		try {
-			const { data } = await calendarAPI.get("/organizations/" + website_key + "?include=all")
-			console.log(data)
-			return data
-		} catch (err) {
-			console.log(err);
-			throw err;
-		}
-	},
-	
-	async postSingleApplication(postObj: IApplicationRequest) {
-		console.log(postObj)
-		try {
-			await calendarAPI.post("/applications/new", postObj)
+			const { data } = await calendarAPI.get(
+				"/organizations/" + website_key + "?include=all"
+			);
+			console.log(data);
+			return data;
 		} catch (err) {
 			console.log(err);
 			throw err;
 		}
 	},
 
-	async patchSingleApplication(application_key: string, patchObj: IApplicationRequest) {
+	async postSingleApplication(postObj: IApplicationRequest) {
+		console.log(postObj);
 		try {
-			await calendarAPI.patch(("/applications/" + application_key), patchObj)
+			await calendarAPI.post("/applications/new", postObj);
 		} catch (err) {
 			console.log(err);
 			throw err;
 		}
-	}
+	},
+
+	async patchSingleApplication(
+		application_key: string,
+		patchObj: IApplicationRequest
+	) {
+		try {
+			await calendarAPI.patch("/applications/" + application_key, patchObj);
+		} catch (err) {
+			console.log(err);
+			throw err;
+		}
+	},
+
+	async deleteSingleApplication(application_key: string, website_key: string) {
+		let body: any = {
+			website_Key: website_key,
+		};
+		try {
+			await calendarAPI.delete("/applications/" + application_key, body);
+		} catch (err) {
+			console.log(err);
+			throw err;
+		}
+	},
 };

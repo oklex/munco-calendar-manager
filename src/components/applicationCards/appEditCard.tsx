@@ -75,6 +75,21 @@ export default class AppEditCard extends React.Component<
 
 	delete = async () => {
 		console.log("requesting delete");
+		await CalendarService.deleteSingleApplication(
+			this.props.appData.application_key, this.props.website_key
+		).then((res) => {
+			console.log("delete completed");
+			this.setState({
+				edited: false,
+				apiWarning: "this application has been deleted"
+			});
+		})
+		.catch((err) => {
+			console.log(err);
+			this.setState({
+				apiWarning: "problem deleting data",
+			});
+		});
 	};
 
 	onChangeName = (value: string) => {
