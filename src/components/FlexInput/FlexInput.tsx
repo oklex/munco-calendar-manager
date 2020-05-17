@@ -1,7 +1,6 @@
 import React from "react";
 import "./FlexInput.scss";
 import { IApplicationType, IOrganizationType } from "../../models/calendar";
-import { matchAppType } from "../../utils/MatchToType";
 
 interface IFlexInputProps {
   placeholder: string;

@@ -2,7 +2,6 @@ import React from "react";
 import {
 	IApplication,
 	IApplicationRequest,
-	IApplicationType,
 } from "../../models/calendar";
 import { CardWrapper } from "../CardWrapper/CardWrapper";
 import "./appEditCard.scss";
@@ -196,9 +195,9 @@ export default class AppEditCard extends React.Component<
 						<i className="fas fa-cog"></i>
 					</button>
 					<div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
-						<a className="dropdown-item" onClick={this.delete}>
+						<p className="dropdown-item" onClick={this.delete}>
 							delete
-						</a>
+						</p>
 					</div>
 				</div>
 				<div className="applicationCard">

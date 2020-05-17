@@ -1,7 +1,6 @@
 import React from "react";
 import {
 	IApplicationRequest,
-	IApplication,
 	IApplicationType,
 } from "../../models/calendar";
 import { CardWrapper } from "../CardWrapper/CardWrapper";
