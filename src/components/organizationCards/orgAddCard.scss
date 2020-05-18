@@ -1,5 +1,12 @@
+@import '../../styles/colours.scss';
+
 .orgAddCard {
     max-width: 500px;
     width: 70vw;
     min-width: 200px;
 }
+    .barOptions {
+		// border-top: 1px solid $neutral-grey;
+		padding-top: 15px;
+		text-align: center;
+    }
