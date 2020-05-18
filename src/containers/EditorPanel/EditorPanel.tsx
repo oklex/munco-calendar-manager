@@ -12,6 +12,7 @@ import { RouteComponentProps, withRouter, Link } from "react-router-dom";
 import { CalendarService } from "../../services/OrganizationServices";
 import { CardWrapper } from "../../components/CardWrapper/CardWrapper";
 import AppCreateCard from "../../components/applicationCards/appCreateCard";
+import OrgEditCard from "../../components/OrganizationCards/orgEditCard";
 
 interface MatchParams {
 	website_key: string;
@@ -127,6 +128,7 @@ class EditorPanel extends React.Component<
 							<i className="fas">&#xf060;</i>
 						</Link>
 						{this.showTitle(this.state.organization)}
+						<OrgEditCard orgData={this.state.organization}/>
 						<br />
 						<h2>Applications</h2>
 						<div className="row">
