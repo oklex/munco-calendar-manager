@@ -105,7 +105,7 @@ class EditorPanel extends React.Component<
 	showAllApps = (apps: IApplication[]) => {
 		return apps.map((app) => {
 			return <AppEditCard appData={app} website_key={this.state.website_key} 
-			updateParent={this.reloadData}/>;
+			updateParent={this.reloadData} key={app.application_key}/>;
 		});
 	};
 
