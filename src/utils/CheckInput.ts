@@ -31,7 +31,7 @@ export let checkOrganizationType = async (org: string) => {
 	let returnVal: boolean = false;
 	await Promise.all(
 		Object.keys(IOrganizationType).map(async (obj: string) => {
-			if (obj === org || (<any>IOrganizationType)[obj] === org) {
+			if (obj === org || (<any>IOrganizationType)[obj] === org) { // eslint-disable-next-line
 				returnVal = true;
 			}
 		})
@@ -46,7 +46,7 @@ export let checkApplicationType = async (app: string) => {
 	let returnVal: boolean = false;
 	await Promise.all(
 		Object.keys(IApplicationType).map(async (obj: string) => {
-			if (obj === app || (<any>IApplicationType)[obj] === app) {
+			if (obj === app || (<any>IApplicationType)[obj] === app) { // eslint-disable-next-line
 				returnVal = true;
 			}
 		})

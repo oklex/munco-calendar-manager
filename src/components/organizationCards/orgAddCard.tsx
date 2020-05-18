@@ -1,12 +1,11 @@
 import React from "react";
 import { IOrganizationType, IOrganizationRequest } from "../../models/calendar";
-import DatePicker from "react-datepicker";
+// import DatePicker from "react-datepicker";
 import { InputWrapper } from "../InputWrapper/InputWrapper";
 import { CalendarService } from "../../services/OrganizationServices";
 import { MapStateToOrgRequest } from "../../utils/mapStateToObj";
 import {
 	checkName,
-	checkOrganizationType,
 	checkWebsite,
 	CheckDateOrder,
 } from "../../utils/CheckInput";

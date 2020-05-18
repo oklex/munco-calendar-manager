@@ -3,14 +3,12 @@ import AppEditCard from "../../components/applicationCards/appEditCard";
 import "./EditorPanel.scss";
 import {
 	IOrganization,
-	ICalendarResponse,
 	IApplication,
 	IEvent,
 	IOrganizationType,
 } from "../../models/calendar";
 import { RouteComponentProps, withRouter, Link } from "react-router-dom";
 import { CalendarService } from "../../services/OrganizationServices";
-import { CardWrapper } from "../../components/CardWrapper/CardWrapper";
 import AppCreateCard from "../../components/applicationCards/appCreateCard";
 import OrgEditCard from "../../components/OrganizationCards/orgEditCard";
 

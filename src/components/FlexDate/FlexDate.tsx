@@ -63,9 +63,7 @@ class FlexDate extends React.Component<IFlexDateProps, IFlexDateState> {
       displayDate: moment(newDate),
       errorMessage: this.props.onChange(newDate),
     });
-    {
       this.toggleInputOff();
-    }
   };
 
   onKeyDown = (e: any) => {
