@@ -27,6 +27,16 @@ export const CalendarService = {
 		}
 	},
 
+	async patchSingleOrganization(obj: IOrganizationRequest, website_key: string): Promise<string> {
+		try {
+			let response: string = await calendarAPI.patch(("/organizations/" + website_key), obj)
+			return response
+		} catch (err) {
+			console.log(err);
+			throw err;
+		}
+	},
+
 	async getSingleOrganizationData(
 		website_key: string
 	): Promise<ICalendarResponse> {
@@ -66,7 +76,7 @@ export const CalendarService = {
 
 	async deleteSingleApplication(application_key: string, website_key: string) {
 		try {
-			await calendarAPI.delete("/applications/" + application_key, { data: {website_key} });
+			await calendarAPI.delete("/applications/" + application_key, { data: { website_key } });
 		} catch (err) {
 			console.log(err);
 			throw err;
