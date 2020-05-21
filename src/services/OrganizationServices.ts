@@ -19,7 +19,9 @@ export const CalendarService = {
 
 	async postNewOrganization(obj: IOrganizationRequest): Promise<string> {
 		try {
-			let response: string = await calendarAPI.post("/organizations/new", obj);
+			console.log("post new org")
+			let response: any = await calendarAPI.post("/organizations/new", obj).then((res) => { console.log(res); return res });
+			console.log(response)
 			return response;
 		} catch (err) {
 			console.log(err);
@@ -35,6 +37,12 @@ export const CalendarService = {
 			console.log(err);
 			throw err;
 		}
+	},
+
+	async deleteSingleOrganization(website_key: string) {
+		await calendarAPI.delete("/organizations/" + website_key).then((res) => { return res }).catch((err) => {
+			console.log(err); throw err
+		})
 	},
 
 	async getSingleOrganizationData(
