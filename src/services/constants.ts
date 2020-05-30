@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-const apiEndpoint = 'http://calendar.munco.ca/api'
+const apiEndpoint = 'https://calendar.munco.ca/api'
 export let calendarAPI = createAPIInstance()
 
 function createAPIInstance() {
