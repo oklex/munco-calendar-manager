@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-const apiEndpoint = 'https://calendar.munco.ca/api'
+const apiEndpoint = 'https://ancient-ravine-42785.herokuapp.com/api'
 export let calendarAPI = createAPIInstance()
 
 function createAPIInstance() {
